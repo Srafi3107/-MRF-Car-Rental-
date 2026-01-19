@@ -1,0 +1,129 @@
+/* Use same layout CSS as CustomerDashboard */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont;
+  background: #f7f8fa;
+}
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: #111827;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.content-area {
+  flex: 1;
+  margin-left: 250px;
+}
+
+.navbar {
+  height: 70px;
+  background: #111827;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 250px;
+  right: 0;
+  z-index: 1001;
+}
+
+.page-content {
+  padding: 100px 48px 32px 48px;
+}
+
+/* METRICS */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.metric {
+  background: white;
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.06);
+  transition: transform 0.2s;
+}
+
+.metric:hover {
+  transform: translateY(-5px);
+}
+
+.metric span {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.metric h2 {
+  font-size: 34px;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+/* TABLES */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.06);
+  margin-bottom: 40px;
+}
+
+.data-table th,
+.data-table td {
+  padding: 16px 24px;
+  text-align: left;
+}
+
+.data-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.data-table tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+}
+
+.status.active {
+  background-color: #10b981;
+}
+
+.status.inactive {
+  background-color: #ef4444;
+}
+
+/* HEADERS */
+.section-title {
+  font-size: 26px;
+  margin: 40px 0 12px;
+}
+
+.cars-section header p {
+  color: #6b7280;
+  font-size: 14px;
+}

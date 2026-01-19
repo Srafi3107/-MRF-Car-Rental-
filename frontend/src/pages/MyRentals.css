@@ -1,0 +1,89 @@
+.myrentals-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.no-rentals {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}
+
+.rentals-table-container {
+  overflow-x: auto;
+}
+
+.rentals-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rentals-table th,
+.rentals-table td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.rentals-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #555;
+}
+
+.rentals-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.status {
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.status.active {
+  background-color: #28a745; /* green */
+}
+
+.status.inactive {
+  background-color: #dc3545; /* red */
+}
+.money {
+  font-weight: 600;
+  color: #16a34a;
+}
+
+.status.active {
+  background: #dcfce7;
+  color: #166534;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+.complete-btn {
+  margin-left: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #10b981;
+  color: white;
+  cursor: pointer;
+}
+
+.complete-btn:hover {
+  background: #059669;
+}

@@ -1,0 +1,23 @@
+[
+    {
+        "total": 3000,
+        "carName": "Hyundai Creta",
+        "days": 2,
+        "email": "alice@car.com",
+        "status": "ACTIVE"
+    },
+    {
+        "total": 3000,
+        "carName": "Toyota Corolla",
+        "days": 3,
+        "email": "alice@car.com",
+        "status": "ACTIVE"
+    },
+    {
+        "total": 4000,
+        "carName": "Maruti Swift",
+        "days": 5,
+        "email": "alice@car.com",
+        "status": "ACTIVE"
+    }
+]
