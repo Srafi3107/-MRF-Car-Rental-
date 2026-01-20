@@ -58,3 +58,6 @@ CAR RENT/
 ```
 
 ---
+Admin Login Details:
+Username: admin
+Password: admin123
