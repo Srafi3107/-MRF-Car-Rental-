@@ -1,0 +1,3 @@
+customer-1|admin|admin123|ADMIN|false|Admin Name|||admin@example.com
+customer-2|srafi|1234|CUSTOMER|false|Shahriar Hossain|238956284|2011-01-01|rafi1@gmail.com
+customer-3|moshiur|1234|CUSTOMER|false|Moshiur|3126126|2015-01-14|m@gmail.com

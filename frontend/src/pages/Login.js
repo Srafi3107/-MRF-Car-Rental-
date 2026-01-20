@@ -1,90 +1,87 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import React, { useState, useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { api } from '../api/api';
+import toyotaImg from '../asset/toyota.jpg';
 
-// Import local image
-import loginImage from "../assets/car.jpg";
+const Login = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-function Login() {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const userData = await api.login(username, password);
+            login(userData);
+            if (userData.role === 'ADMIN') {
+                navigate('/admin');
+            } else {
+                navigate('/dashboard');
+            }
+        } catch (err) {
+            setError('Invalid credentials');
+        }
+    };
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+    return (
+        <div className="auth-page">
+            <header className="page-header">
+                <h1>MRF Car Rental</h1>
+            </header>
+            <div className="auth-card">
+                <div className="auth-left">
+                    <h2>Login</h2>
+                    <p>Enter your credentials to access your account.</p>
+                    {error && <div className="alert-error">{error}</div>}
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input
+                                className="input-field"
+                                type="text"
+                                placeholder="Enter your email"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <input
+                                className="input-field"
+                                type="password"
+                                placeholder="........"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-options">
+                            <label>
+                                <input type="checkbox" /> Remember me
+                            </label>
+                        </div>
+                        <button type="submit" className="btn-primary">Login</button>
+                    </form>
 
-  const handleLogin = async (e) => {
-  e.preventDefault();
-
-  try {
-    const response = await fetch("http://localhost:8080/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }) // or username/password if your backend uses that
-    });
-
-    if (!response.ok) {
-      alert("Login failed");
-      return;
-    }
-
-    const user = await response.json();
-
-    // ✅ Save the full user info in localStorage, including email
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        id: user.id,
-        username: user.username,
-        email: user.email,  // important for My Rentals
-        role: user.role
-      })
-    );
-
-    // Navigate based on role
-    if (user.role === "ADMIN") navigate("/admin");
-    else navigate("/customer");
-
-  } catch (err) {
-    console.error(err);
-    alert("Server error");
-  }
-};
+                    <div className="auth-divider">or</div>
 
 
-  return (
-    <div className="login-page">
+                    <div className="auth-footer">
+                        <span>Don't have an Account? </span>
+                        <Link to="/register" className="auth-link">Sign Up</Link>
+                    </div>
+                </div>
+                <div className="auth-right">
+                    <img src={toyotaImg} alt="Toyota C-HR" />
 
-      {/* LEFT */}
-      <div className="login-left">
-        <div className="login-box">
-          <h1>Car Rental System</h1>
-          <p>Login to continue</p>
-
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-
-          <button onClick={handleLogin}>Login</button>
+                </div>
+            </div>
         </div>
-      </div>
-
-      {/* RIGHT */}
-      <div
-        className="login-right"
-        style={{ backgroundImage: `url(${loginImage})` }}
-      ></div>
-
-    </div>
-  );
-}
+    );
+};
 
 export default Login;

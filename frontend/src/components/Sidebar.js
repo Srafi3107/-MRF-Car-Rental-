@@ -1,38 +1,47 @@
-import { useNavigate } from "react-router-dom";
-import "./Sidebar.css";
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
-function Sidebar({ role }) {
-  const navigate = useNavigate();
+const Sidebar = () => {
+    const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
-  return (
-    <div className="sidebar">
-      {/* LOGO */}
-      <div className="sidebar-header">
-        <h2>CarRent</h2>
-        <p className="tagline">Dashboard</p>
-      </div>
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
 
-      {/* MENU */}
-      <ul className="sidebar-menu">
-        <li onClick={() => navigate(role === "ADMIN" ? "/admin" : "/customer")}>
-          Dashboard
-        </li>
+    if (!user) return null;
 
-        {role === "ADMIN" && (
-          <>
-               <li onClick={() => window.location.href = "/manage-cars"}>Manage Cars</li>
-            <li onClick={() => window.location.href = "/view-bookings"}>View Bookings</li>
-          </>
-        )}
+    const isActive = (path) => location.pathname === path;
 
-        {role === "CUSTOMER" && (
-          <>
-            <li onClick={() => navigate("/myrentals")}>My Rentals</li>
-          </>
-        )}
-      </ul>
-    </div>
-  );
-}
+    return (
+        <div className="sidebar">
+            <div className="sidebar-header">
+                <h2>CarRental</h2>
+                <p>Welcome, {user.username}</p>
+            </div>
+
+            <nav className="sidebar-nav">
+                {user.role === 'ADMIN' ? (
+                    <>
+                        <Link to="/admin" className={isActive('/admin') ? 'active' : ''}>Dashboard</Link>
+                        <Link to="/admin/cars" className={isActive('/admin/cars') ? 'active' : ''}>Manage Cars</Link>
+                        <Link to="/admin/customers" className={isActive('/admin/customers') ? 'active' : ''}>View Customers</Link>
+                        <Link to="/admin/bookings" className={isActive('/admin/bookings') ? 'active' : ''}>View Bookings</Link>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/dashboard" className={isActive('/dashboard') ? 'active' : ''}>Dashboard</Link>
+                        <Link to="/dashboard/book" className={isActive('/dashboard/book') ? 'active' : ''}>Book Cars</Link>
+                        <Link to="/dashboard/bookings" className={isActive('/dashboard/bookings') ? 'active' : ''}>My Bookings</Link>
+                        <Link to="/profile" className={isActive('/profile') ? 'active' : ''}>My Profile</Link>
+                    </>
+                )}
+            </nav>
+        </div>
+    );
+};
 
 export default Sidebar;
