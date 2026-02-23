@@ -4,60 +4,42 @@ A full-stack, enterprise-grade Car Rental Management System built with a **Java 
 
 ---
 
-## ✨ Features
-
-### 👤 User Roles
-- **Admin**: Full control over car inventory, user management, and booking oversight.
-- **Customer**: Browse available cars, rent vehicles, view booking history, and manage profiles.
-
-### 🛠️ Core Functionality
-- **Car Management**: Add, update, and delete cars with image support (Base64).
-- **Booking System**: Real-time availability tracking and automated price calculation based on rental duration.
-- **Authentication**: Secure login and registration with role-based access control.
-- **Password Recovery**: Admin-approved password reset system.
-- **Analytics Dashboard**: Visual representation of bookings and revenue using dynamic charts.
-- **Responsive UI**: Premium design with glassmorphism effects and smooth animations.
-
----
-
-## 🚀 Tech Stack
-
-### Frontend
-- **Framework**: React 19
-- **Routing**: React Router 7
-- **Styling**: Vanilla CSS (Premium Design System)
-- **Charts**: Recharts
-- **Icons**: Lucide React (or equivalent SVGs)
-
-### Backend
-- **Language**: Java
-- **Architecture**: Service-Oriented (OOP Principles)
-- **Persistence**: File-based storage (`data/*.txt`) for lightweight deployment.
-- **Server**: Custom HTTP Server implementation.
-
----
-
-## 📂 Project Structure
-
-```text
+✨ Key Features
+🔐 Advanced Security Flow
+Multi-Stage Reset: A robust, Admin-approved password reset system. Requests are submitted by users and must be manually approved by an Admin before finalization.
+RBAC: Role-Based Access Control enforcing strict separation between Customer and Admin consoles.
+🚘 Fleet & Booking Management
+Dynamic Fleet: Real-time management of vehicles with rich descriptions and binary image persistence.
+Booking Engine: Sophisticated availability tracking and automated price calculation based on rental duration.
+Customer Insights: Detailed booking history and profile management for registered users.
+🎨 Premium User Experience
+Glassmorphism UI: High-end dark theme design using modern CSS tokens.
+Micro-animations: Smooth transitions and interactive elements powered by Framer Motion.
+Real-time Feedback: Instant notifications and toast alerts for all system actions.
+🛠️ Technical Architecture
+Backend (Java)
+Custom Web Server: Built using com.sun.net.httpserver to demonstrate deep understanding of HTTP protocols without heavy frameworks.
+Service-Oriented Design: Clean separation of concerns between Controllers (Handlers), Services, and Models.
+File Persistence: Lightweight CSV-based data storage for zero-config deployment.
+Unified CORS: Advanced Cross-Origin Resource Sharing handling for secure frontend-backend communication.
+Frontend (React)
+Modern Stack: React 19 with Function Components and Hooks.
+Design System: A custom-built Vanilla CSS framework prioritized for performance and visual excellence.
+State Management: Robust handling of authentication sessions and real-time fleet synchronization.
+📂 Project Structure
+text
 CAR RENT/
-├── backend/                # Java Backend Source
-│   ├── src/com/carrental/
-│   │   ├── handler/        # HTTP Request Handlers
-│   │   ├── model/          # Data Models (Car, User, Booking)
-│   │   ├── repository/     # File Persistence Logic
-│   │   └── service/        # Business Logic
-│   └── data/               # Persistent Storage (TXT Files)
-├── frontend/               # React Frontend Source
-│   ├── src/
-│   │   ├── components/     # Reusable UI Components
-│   │   ├── pages/          # Full Page Views
-│   │   └── styles/         # Global CSS & Design Tokens
-│   └── public/             # Static Assets
-└── system_diagrams.md      # Architecture & ERD Diagrams
-```
-
----
-Admin Login Details:
-Username: admin
-Password: admin123
+├── backend_rent/           # Custom Java Server source
+│   ├── src/handler/        # API Controllers & CORS logic
+│   ├── src/model/          # Domain Objects (Car, User, Booking)
+│   ├── src/service/        # Core Business Logic
+│   └── *.txt               # Data Persistence Layer
+├── frontend/               # React 19 Application
+│   ├── src/api/            # Service Layer (Axios/Fetch)
+│   ├── src/pages/          # Premium Dashboard Views
+│   └── src/components/     # Reusable Atomic Components
+└── Car pics/               # Persistent Binary Image Storage
+🚀 Quick Start
+Backend: Compile and run Main.java inside backend_rent/src/. The server will start on port 8080.
+Frontend: Run npm install and npm start in the frontend/ directory.
+Verify: Log in as admin (password: admin123) to access the Security Panel and approve reset requests!
