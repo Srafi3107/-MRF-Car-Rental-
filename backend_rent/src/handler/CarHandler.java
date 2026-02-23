@@ -32,7 +32,8 @@ public class CarHandler extends BaseHandler {
             }
 
             // Manually build JSON array
-            String jsonArray = "[" + cars.stream().map(this::carToJson).collect(Collectors.joining(",")) + "]";
+            String jsonArray = "[" + cars.stream().map(c -> carToJson(c, exchange)).collect(Collectors.joining(","))
+                    + "]";
             sendResponse(exchange, 200, jsonArray);
         } else if ("POST".equalsIgnoreCase(method)) {
             String body = readRequestBody(exchange);
@@ -41,9 +42,10 @@ public class CarHandler extends BaseHandler {
             car.setBrand(json.get("brand"));
             car.setModel(json.get("model"));
             car.setPricePerDay(Double.parseDouble(json.get("pricePerDay")));
-            car.setImageBase64(json.get("imageBase64"));
+            car.setImage(json.get("image"));
+            car.setDescription(json.get("description"));
             carService.addCar(car);
-            sendResponse(exchange, 201, carToJson(car));
+            sendResponse(exchange, 201, carToJson(car, exchange));
         } else if ("PUT".equalsIgnoreCase(method)) {
             String body = readRequestBody(exchange);
             Map<String, String> json = parseJson(body);
@@ -53,11 +55,12 @@ public class CarHandler extends BaseHandler {
             car.setModel(json.get("model"));
             car.setPricePerDay(Double.parseDouble(json.get("pricePerDay")));
             car.setAvailable(Boolean.parseBoolean(json.get("isAvailable")));
-            car.setImageBase64(json.get("imageBase64"));
+            car.setImage(json.get("image"));
+            car.setDescription(json.get("description"));
 
             Car updated = carService.updateCar(car);
             if (updated != null) {
-                sendResponse(exchange, 200, carToJson(updated));
+                sendResponse(exchange, 200, carToJson(updated, exchange));
             } else {
                 sendResponse(exchange, 404, "{\"error\":\"Car not found\"}");
             }
@@ -75,11 +78,21 @@ public class CarHandler extends BaseHandler {
         }
     }
 
-    private String carToJson(Car car) {
-        String img = (car.getImageBase64() == null) ? "" : car.getImageBase64();
+    private String carToJson(Car car, HttpExchange exchange) {
+        String img = (car.getImage() == null) ? "" : car.getImage();
+        String host = exchange.getRequestHeaders().getFirst("Host");
+        if (host == null || host.isEmpty()) {
+            host = "localhost:8080"; // Fallback
+        }
+        String imageUrl = "";
+        if (!img.isEmpty()) {
+            imageUrl = "http://" + host + "/images/" + img;
+        }
         return "{\"id\":\"" + car.getId() + "\", \"brand\":\"" + car.getBrand() + "\", \"model\":\"" + car.getModel()
                 + "\", \"pricePerDay\":" + car.getPricePerDay() + ", \"isAvailable\":" + car.isAvailable()
-                + ", \"imageBase64\":\"" + img + "\", \"averageRating\":" + car.getAverageRating()
+                + ", \"image\":\"" + img + "\", \"imageUrl\":\"" + imageUrl + "\", \"description\":\""
+                + car.getDescription() + "\", \"averageRating\":"
+                + car.getAverageRating()
                 + ", \"ratingCount\":" + car.getRatingCount() + "}";
     }
 }

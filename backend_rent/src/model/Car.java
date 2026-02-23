@@ -9,21 +9,23 @@ public class Car implements Serializable {
     private String model;
     private double pricePerDay;
     private boolean isAvailable;
-    private String imageBase64;
+    private String image;
+    private String description;
     private double totalRating;
     private int ratingCount;
 
     public Car() {
     }
 
-    public Car(String id, String brand, String model, double pricePerDay, boolean isAvailable, String imageBase64,
-               double totalRating, int ratingCount) {
+    public Car(String id, String brand, String model, double pricePerDay, boolean isAvailable, String image,
+            String description, double totalRating, int ratingCount) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.pricePerDay = pricePerDay;
         this.isAvailable = isAvailable;
-        this.imageBase64 = imageBase64;
+        this.image = image;
+        this.description = description;
         this.totalRating = totalRating;
         this.ratingCount = ratingCount;
     }
@@ -68,12 +70,20 @@ public class Car implements Serializable {
         isAvailable = available;
     }
 
-    public String getImageBase64() {
-        return imageBase64;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageBase64(String imageBase64) {
-        this.imageBase64 = imageBase64;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description != null ? description.replace("|", "") : "";
     }
 
     public double getTotalRating() {
@@ -100,23 +110,22 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        String img = (imageBase64 == null) ? "" : imageBase64;
-        return id + "|" + brand + "|" + model + "|" + pricePerDay + "|" + isAvailable + "|" + img + "|" + totalRating
-                + "|" + ratingCount;
+        String img = (image == null) ? "" : image;
+        String desc = (description == null) ? "" : description;
+        return id + "|" + brand + "|" + model + "|" + pricePerDay + "|" + isAvailable + "|" + img + "|" + desc + "|"
+                + totalRating + "|" + ratingCount;
     }
 
     public static Car fromString(String line) {
         String[] parts = line.split("\\|");
         if (parts.length < 5)
             return null;
-        String img = "";
-        if (parts.length >= 6) {
-            img = parts[5];
-        }
-        double totalR = (parts.length >= 7) ? Double.parseDouble(parts[6]) : 0;
-        int countR = (parts.length >= 8) ? Integer.parseInt(parts[7]) : 0;
+        String img = (parts.length >= 6) ? parts[5] : "";
+        String desc = (parts.length >= 7) ? parts[6] : "";
+        double totalR = (parts.length >= 8) ? Double.parseDouble(parts[7]) : 0;
+        int countR = (parts.length >= 9) ? Integer.parseInt(parts[8]) : 0;
 
         return new Car(parts[0], parts[1], parts[2], Double.parseDouble(parts[3]), Boolean.parseBoolean(parts[4]), img,
-                totalR, countR);
+                desc, totalR, countR);
     }
 }

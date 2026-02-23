@@ -1,129 +1,148 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import { api } from '../api/api';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { User, Mail, Phone, Calendar, Shield, Save, UserCircle } from "lucide-react";
+import { toast } from "sonner";
+import { api } from "../api/api";
+import { useAuth } from "../context/AuthContext";
+import { Button } from "../components/ui/Button";
+import { Input } from "../components/ui/Input";
+import { GlassCard } from "../components/ui/GlassCard";
 
 const Profile = () => {
-    const { user, login } = useContext(AuthContext);
-    const [name, setName] = useState(user?.name || '');
-    const [email, setEmail] = useState(user?.email || '');
-    const [phone, setPhone] = useState(user?.phone || '');
-    const [birthdate, setBirthdate] = useState(user?.birthdate || '');
-    const [message, setMessage] = useState('');
-    const [error, setError] = useState('');
+    const { user, login } = useAuth();
+    const [formData, setFormData] = useState({
+        name: user?.name || "",
+        email: user?.email || "",
+        phone: user?.phone || "",
+        birthdate: user?.birthdate || "",
+    });
+    const [loading, setLoading] = useState(false);
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        setMessage('');
-        setError('');
+        setLoading(true);
         try {
-            const updatedUser = await api.updateProfile(user.id, {
-                name, email, phone, birthdate
+            const updatedUser = await api.updateProfile(user.id, formData);
+            login(updatedUser);
+            toast.success("Profile updated!", {
+                description: "Your changes have been saved successfully.",
             });
-            login(updatedUser); // Update local state
-            setMessage('Profile updated successfully!');
         } catch (err) {
-            setError('Failed to update profile.');
+            toast.error("Update failed", {
+                description: "We couldn't save your changes. Please try again.",
+            });
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="profile-container">
-            <h1>My Profile</h1>
-            <p className="subtitle">View and manage your personal information.</p>
+        <div className="max-w-4xl mx-auto px-6 py-12 space-y-10">
+            <div className="space-y-2">
+                <h1 className="text-3xl font-bold text-white tracking-tight">Account Settings</h1>
+                <p className="text-slate-400">Manage your profile information and preferences</p>
+            </div>
 
-            <div className="profile-layout">
-                {/* Read-only Section */}
-                <div className="card profile-summary">
-                    <div className="profile-summary-header">
-                        <div className="profile-avatar">
-                            
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                {/* Profile Card */}
+                <GlassCard className="lg:col-span-1 p-8 text-center space-y-6 flex flex-col items-center border-white/5 h-fit">
+                    <div className="relative group">
+                        <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform duration-300">
+                            <UserCircle size={64} />
                         </div>
-                
-                    </div>
-
-                    <div className="summary-details">
-                        <div className="summary-item">
-                            <div className="details">
-                                <label>Username:  </label>
-                                <span className="value">{user?.username}</span>
-                            </div>
-                        </div>
-                        <div className="summary-item">
-                            <div className="details">
-                                <label>Email Address:  </label>
-                                <span className="value">{user?.email || 'Not provided'}</span>
-                            </div>
-                        </div>
-                        <div className="summary-item">
-                            <div className="details">
-                                <label>Phone Number:  </label>
-                                <span className="value">{user?.phone || 'Not provided'}</span>
-                            </div>
-                        </div>
-                        <div className="summary-item">
-                            <div className="details">
-                                <label>Birth Date:  </label>
-                                <span className="value">{user?.birthdate || 'Not provided'}</span>
-                            </div>
+                        <div className="absolute bottom-0 right-0 p-1.5 bg-primary text-white rounded-full border-4 border-navy-900 shadow-xl">
+                            <Shield size={12} />
                         </div>
                     </div>
-                </div>
-
-                {/* Edit Section */}
-                <div className="card profile-edit">
-                    <h3>Update Information</h3>
-                    {message && <div className="alert-success">{message}</div>}
-                    {error && <div className="alert-error">{error}</div>}
-
-                    <form onSubmit={handleUpdate} className="profile-form">
-                        <div className="form-group">
-                            <label>Full Name</label>
-                            <input
-                                className="input-field"
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                            />
+                    <div className="space-y-1">
+                        <h3 className="text-xl font-bold text-white">{user?.name || user?.username}</h3>
+                        <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">{user?.role || "Member"}</p>
+                    </div>
+                    <div className="w-full pt-6 border-t border-white/10 space-y-4 text-left">
+                        <div className="flex items-center gap-3 text-sm text-slate-400">
+                            <User className="text-primary" size={16} />
+                            <span>@{user?.username}</span>
                         </div>
-
-                        <div className="form-group">
-                            <label>Email Address</label>
-                            <input
-                                className="input-field"
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
+                        <div className="flex items-center gap-3 text-sm text-slate-400">
+                            <Mail className="text-primary" size={16} />
+                            <span className="truncate">{user?.email || "No email"}</span>
                         </div>
+                    </div>
+                </GlassCard>
 
-                        <div className="form-group-row">
-                            <div className="form-group">
-                                <label>Phone Number</label>
-                                <input
-                                    className="input-field"
-                                    type="text"
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
+                {/* Edit Form */}
+                <GlassCard className="lg:col-span-2 p-8 border-white/5">
+                    <form onSubmit={handleUpdate} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2 md:col-span-2">
+                            <label className="text-xs font-semibold text-slate-400 uppercase tracking-widest pl-1">Full Name</label>
+                            <div className="relative">
+                                <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 h-4 w-4" />
+                                <Input
+                                    name="name"
+                                    className="pl-10"
+                                    value={formData.name}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
-                            <div className="form-group">
-                                <label>Birth Date</label>
-                                <input
-                                    className="input-field"
+                        </div>
+
+                        <div className="space-y-2 md:col-span-2">
+                            <label className="text-xs font-semibold text-slate-400 uppercase tracking-widest pl-1">Email Address</label>
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 h-4 w-4" />
+                                <Input
+                                    name="email"
+                                    type="email"
+                                    className="pl-10"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-xs font-semibold text-slate-400 uppercase tracking-widest pl-1">Phone Number</label>
+                            <div className="relative">
+                                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 h-4 w-4" />
+                                <Input
+                                    name="phone"
+                                    className="pl-10"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-xs font-semibold text-slate-400 uppercase tracking-widest pl-1">Birth Date</label>
+                            <div className="relative">
+                                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 h-4 w-4" />
+                                <Input
+                                    name="birthdate"
                                     type="date"
-                                    value={birthdate}
-                                    onChange={(e) => setBirthdate(e.target.value)}
+                                    className="pl-10"
+                                    value={formData.birthdate}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
                         </div>
 
-                        <button type="submit" className="btn-primary">Save Changes</button>
+                        <div className="pt-4 md:col-span-2">
+                            <Button className="w-full gap-2" disabled={loading}>
+                                {loading ? "Saving Changes..." : "Save Changes"}
+                                <Save size={18} />
+                            </Button>
+                        </div>
                     </form>
-                </div>
+                </GlassCard>
             </div>
         </div>
     );

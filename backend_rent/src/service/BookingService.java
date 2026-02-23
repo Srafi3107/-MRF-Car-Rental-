@@ -47,7 +47,7 @@ public class BookingService {
 
                 int nextId = bookings.size() + 1;
                 // Initial status is PENDING. Car is NOT marked unavailable yet.
-                Booking booking = new Booking("booking-" + nextId, userId, carId, startDate, endDate, total,
+                Booking booking = new Booking("B-" + nextId, userId, carId, startDate, endDate, total,
                         false, customerName, customerPhone, "PENDING", 0, "");
                 bookings.add(booking);
 

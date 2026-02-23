@@ -16,23 +16,37 @@ public abstract class BaseHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        String method = exchange.getRequestMethod();
+        String uri = exchange.getRequestURI().toString();
+        System.out.println(">>> [" + method + "] " + uri);
+
+        // Essential: Set CORS headers before ANYTHING else
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Headers",
+                "Content-Type, Authorization, X-Requested-With, Accept");
+        exchange.getResponseHeaders().set("Access-Control-Max-Age", "3600");
+
+        if ("OPTIONS".equalsIgnoreCase(exchange.getRequestMethod())) {
+            exchange.sendResponseHeaders(204, -1);
+            return;
+        }
+
         try {
-            // CORS Headers
-            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-            if ("OPTIONS".equalsIgnoreCase(exchange.getRequestMethod())) {
-                exchange.sendResponseHeaders(204, -1);
-                return;
-            }
-
             System.out.println("Processing " + exchange.getRequestMethod() + " " + exchange.getRequestURI());
             handleRequest(exchange);
         } catch (Exception e) {
             e.printStackTrace();
             String error = "{\"error\":\"Internal Server Error: " + e.getMessage() + "\"}";
             byte[] bytes = error.getBytes(StandardCharsets.UTF_8);
+
+            // Ensure CORS headers are present even in error responses
+            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            exchange.getResponseHeaders().set("Access-Control-Allow-Headers",
+                    "Content-Type, Authorization, X-Requested-With, Accept");
+            exchange.getResponseHeaders().set("Content-Type", "application/json");
+
             exchange.sendResponseHeaders(500, bytes.length);
             try (OutputStream os = exchange.getResponseBody()) {
                 os.write(bytes);
@@ -44,6 +58,7 @@ public abstract class BaseHandler implements HttpHandler {
 
     protected void sendResponse(HttpExchange exchange, int statusCode, String response) throws IOException {
         byte[] bytes = response.getBytes(StandardCharsets.UTF_8);
+        exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(statusCode, bytes.length);
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(bytes);

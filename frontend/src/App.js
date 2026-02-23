@@ -1,72 +1,78 @@
-import { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthContext, AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Layout from './components/common/Layout';
+
+// Pages
+import Home from './pages/Home';
+import Fleet from './pages/Fleet';
+import About from './pages/About';
+import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AdminDashboard from './pages/AdminDashboard';
 import CustomerDashboard from './pages/CustomerDashboard';
-import Sidebar from './components/Sidebar';
-import TopBar from './components/TopBar';
-
-
 import Profile from './pages/Profile';
+import ForgotPassword from './pages/ForgotPassword';
+import NotFound from './pages/NotFound';
+import ErrorBoundary from './components/ui/ErrorBoundary';
 
 const PrivateRoute = ({ children, role }) => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   if (!user) return <Navigate to="/login" />;
-  if (role && user.role !== role) return <Navigate to="/" />;
+  if (role) {
+    const userRole = user.role?.toLowerCase();
+    const requiredRole = role.toLowerCase();
+    if (userRole !== requiredRole) {
+      return <Navigate to={userRole === 'admin' ? '/admin' : '/dashboard'} />;
+    }
+  }
   return children;
-};
-
-
-const Layout = ({ children }) => {
-  const { user } = useContext(AuthContext);
-  return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
-      {user && <Sidebar />}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginLeft: user ? '250px' : '0' }}>
-        {user && <TopBar />}
-        <div style={{ flex: 1, padding: '20px', background: '#f8fafc' }}>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
 };
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Layout>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+        <ErrorBoundary>
+          <Layout>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/fleet" element={<Fleet />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
 
-            {/* Admin Routes */}
-            <Route path="/admin/*" element={
-              <PrivateRoute role="ADMIN">
-                <AdminDashboard />
-              </PrivateRoute>
-            } />
+              {/* Auth Routes */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
 
-            {/* Customer Routes */}
-            <Route path="/dashboard/*" element={
-              <PrivateRoute role="CUSTOMER">
-                <CustomerDashboard />
-              </PrivateRoute>
-            } />
+              {/* Admin Routes */}
+              <Route path="/admin/*" element={
+                <PrivateRoute role="ADMIN">
+                  <AdminDashboard />
+                </PrivateRoute>
+              } />
 
-            {/* Profile Route */}
-            <Route path="/profile" element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-            } />
+              {/* Customer Routes */}
+              <Route path="/dashboard/*" element={
+                <PrivateRoute role="CUSTOMER">
+                  <CustomerDashboard />
+                </PrivateRoute>
+              } />
 
-            <Route path="/" element={<Navigate to="/login" />} />
-          </Routes>
-        </Layout>
+              {/* Shared Protected Routes */}
+              <Route path="/profile" element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              } />
+
+              {/* Catch All */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </ErrorBoundary>
       </Router>
     </AuthProvider>
   );

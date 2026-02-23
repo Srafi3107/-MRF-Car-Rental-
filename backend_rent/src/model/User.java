@@ -10,6 +10,7 @@ public class User implements Serializable {
     private String role; // "ADMIN" or "CUSTOMER"
 
     private boolean passwordResetRequested;
+    private boolean passwordResetApproved;
     // New fields
     private String name;
     private String phone;
@@ -20,12 +21,13 @@ public class User implements Serializable {
     }
 
     public User(String id, String username, String password, String role, boolean passwordResetRequested,
-                String name, String phone, String birthdate, String email) {
+            boolean passwordResetApproved, String name, String phone, String birthdate, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
         this.passwordResetRequested = passwordResetRequested;
+        this.passwordResetApproved = passwordResetApproved;
         this.name = name;
         this.phone = phone;
         this.birthdate = birthdate;
@@ -72,6 +74,14 @@ public class User implements Serializable {
         this.passwordResetRequested = passwordResetRequested;
     }
 
+    public boolean isPasswordResetApproved() {
+        return passwordResetApproved;
+    }
+
+    public void setPasswordResetApproved(boolean passwordResetApproved) {
+        this.passwordResetApproved = passwordResetApproved;
+    }
+
     public String getName() {
         return name;
     }
@@ -111,8 +121,8 @@ public class User implements Serializable {
         String p = (phone == null) ? "" : phone;
         String b = (birthdate == null) ? "" : birthdate;
         String e = (email == null) ? "" : email;
-        return id + "|" + username + "|" + password + "|" + role + "|" + passwordResetRequested + "|" + n + "|" + p
-                + "|" + b + "|" + e;
+        return id + "|" + username + "|" + password + "|" + role + "|" + passwordResetRequested + "|"
+                + passwordResetApproved + "|" + n + "|" + p + "|" + b + "|" + e;
     }
 
     public static User fromString(String line) {
@@ -120,14 +130,18 @@ public class User implements Serializable {
         if (parts.length < 4)
             return null;
         boolean resetRequested = false;
+        boolean resetApproved = false;
         if (parts.length >= 5) {
             resetRequested = Boolean.parseBoolean(parts[4]);
         }
-        String n = (parts.length >= 6) ? parts[5] : "";
-        String p = (parts.length >= 7) ? parts[6] : "";
-        String b = (parts.length >= 8) ? parts[7] : "";
-        String e = (parts.length >= 9) ? parts[8] : "";
+        if (parts.length >= 6) {
+            resetApproved = Boolean.parseBoolean(parts[5]);
+        }
+        String n = (parts.length >= 7) ? parts[6] : "";
+        String p = (parts.length >= 8) ? parts[7] : "";
+        String b = (parts.length >= 9) ? parts[8] : "";
+        String e = (parts.length >= 10) ? parts[9] : "";
 
-        return new User(parts[0], parts[1], parts[2], parts[3], resetRequested, n, p, b, e);
+        return new User(parts[0], parts[1], parts[2], parts[3], resetRequested, resetApproved, n, p, b, e);
     }
 }

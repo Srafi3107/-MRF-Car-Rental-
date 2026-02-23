@@ -18,7 +18,8 @@ public class UserService {
         this.users = loadUsers();
         // Seed admin if not exists
         if (users.stream().noneMatch(u -> "ADMIN".equals(u.getRole()))) {
-            register(new User(UUID.randomUUID().toString(), "admin", "admin123", "ADMIN", false, "Admin Name", "", "",
+            register(new User(UUID.randomUUID().toString(), "admin", "admin123", "ADMIN", false, false, "Admin Name",
+                    "", "",
                     "admin@example.com"));
         }
     }
@@ -60,6 +61,53 @@ public class UserService {
         return users.stream().filter(u -> u.getId().equals(id)).findFirst();
     }
 
+    public User forgotPassword(String username, String email) {
+        Optional<User> userOpt = findByUsername(username)
+                .filter(u -> u.getEmail() != null && u.getEmail().equalsIgnoreCase(email));
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            user.setPasswordResetRequested(true);
+            user.setPasswordResetApproved(false);
+            saveUsers();
+            return user;
+        }
+        return null;
+    }
+
+    public boolean approvePasswordReset(String userId) {
+        Optional<User> userOpt = findById(userId);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            user.setPasswordResetApproved(true);
+            saveUsers();
+            return true;
+        }
+        return false;
+    }
+
+    public User finalizeReset(String username, String newPassword) {
+        Optional<User> userOpt = findByUsername(username);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            if (user.isPasswordResetRequested() && user.isPasswordResetApproved()) {
+                user.setPassword(newPassword);
+                user.setPasswordResetRequested(false);
+                user.setPasswordResetApproved(false);
+                saveUsers();
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public List<User> getResetRequests() {
+        return users.stream()
+                .filter(User::isPasswordResetRequested)
+                .filter(u -> !u.isPasswordResetApproved())
+                .collect(Collectors.toList());
+    }
+
     public User updateUser(User updatedUser) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getId().equals(updatedUser.getId())) {
@@ -95,7 +143,8 @@ public class UserService {
     }
 
     public List<User> getUsersRequestingReset() {
-        return users.stream().filter(User::isPasswordResetRequested).collect(Collectors.toList());
+        return users.stream().filter(u -> u.isPasswordResetRequested() && !u.isPasswordResetApproved())
+                .collect(Collectors.toList());
     }
 
     public List<User> getAllCustomers() {

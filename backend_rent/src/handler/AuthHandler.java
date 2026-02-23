@@ -30,6 +30,14 @@ public class AuthHandler extends BaseHandler {
                 handleRegister(exchange, json);
             } else if (path.endsWith("/update-profile")) {
                 handleUpdateProfile(exchange, json);
+            } else if (path.endsWith("/forgot-password")) {
+                handleForgotPassword(exchange, json);
+            } else if (path.endsWith("/reset-status")) {
+                handleResetStatus(exchange, json);
+            } else if (path.endsWith("/approve-reset")) {
+                handleApproveReset(exchange, json);
+            } else if (path.endsWith("/finalize-reset")) {
+                handleFinalizeReset(exchange, json);
             } else {
                 sendResponse(exchange, 404, "Not Found");
             }
@@ -101,6 +109,53 @@ public class AuthHandler extends BaseHandler {
         }
     }
 
+    private void handleForgotPassword(HttpExchange exchange, Map<String, String> json) throws IOException {
+        String username = json.get("username");
+        String email = json.get("email");
+        User user = userService.forgotPassword(username, email);
+        if (user != null) {
+            sendResponse(exchange, 200,
+                    "{\"success\":true, \"message\":\"Reset request submitted to Admin for approval.\"}");
+        } else {
+            sendResponse(exchange, 404, "{\"error\":\"Invalid username or email\"}");
+        }
+    }
+
+    private void handleResetStatus(HttpExchange exchange, Map<String, String> json) throws IOException {
+        String username = json.get("username");
+        User user = userService.findByUsername(username).orElse(null);
+        if (user != null) {
+            String status = "PENDING";
+            if (user.isPasswordResetApproved())
+                status = "APPROVED";
+            if (!user.isPasswordResetRequested())
+                status = "NONE";
+            sendResponse(exchange, 200, "{\"status\":\"" + status + "\"}");
+        } else {
+            sendResponse(exchange, 404, "{\"error\":\"User not found\"}");
+        }
+    }
+
+    private void handleApproveReset(HttpExchange exchange, Map<String, String> json) throws IOException {
+        String userId = json.get("userId");
+        if (userService.approvePasswordReset(userId)) {
+            sendResponse(exchange, 200, "{\"success\":true}");
+        } else {
+            sendResponse(exchange, 404, "{\"error\":\"User not found\"}");
+        }
+    }
+
+    private void handleFinalizeReset(HttpExchange exchange, Map<String, String> json) throws IOException {
+        String username = json.get("username");
+        String newPassword = json.get("password");
+        User user = userService.finalizeReset(username, newPassword);
+        if (user != null) {
+            sendResponse(exchange, 200, "{\"success\":true, \"message\":\"Password updated successfully.\"}");
+        } else {
+            sendResponse(exchange, 400, "{\"error\":\"Reset not approved or invalid username\"}");
+        }
+    }
+
     private void handleDeleteUser(HttpExchange exchange) throws IOException {
         String query = exchange.getRequestURI().getQuery();
         Map<String, String> params = parseQueryParams(query);
@@ -134,6 +189,7 @@ public class AuthHandler extends BaseHandler {
         return "{\"id\":\"" + user.getId() + "\", \"username\":\"" + user.getUsername()
                 + "\", \"role\":\"" + user.getRole() + "\", \"passwordResetRequested\":"
                 + user.isPasswordResetRequested()
+                + ", \"passwordResetApproved\":" + user.isPasswordResetApproved()
                 + ", \"name\":\"" + n + "\", \"phone\":\"" + p
                 + "\", \"birthdate\":\"" + b + "\", \"email\":\"" + e + "\"}";
     }
