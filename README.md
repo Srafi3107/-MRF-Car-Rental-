@@ -2,14 +2,18 @@
 
 A full-stack, enterprise-grade Car Rental Management System built with a Java OOP backend and a React frontend.
 
+
 This project demonstrates clean architecture, robust data validation, and a premium user experience.
 
+
 ✨ Key Features
+
 🔐 Advanced Security Flow
 
 Multi-Stage Password Reset – Users submit reset requests that must be manually approved by an Admin.
 
 RBAC (Role-Based Access Control) – Strict separation between Customer and Admin consoles.
+
 
 🚘 Fleet & Booking Management
 
@@ -19,6 +23,7 @@ Smart Booking Engine – Availability tracking with automated rental price calcu
 
 Customer Insights – Booking history and profile management for registered users.
 
+
 🎨 Premium User Experience
 
 Glassmorphism UI – Modern dark theme with elegant styling.
@@ -26,6 +31,7 @@ Glassmorphism UI – Modern dark theme with elegant styling.
 Micro-animations – Smooth transitions powered by Framer Motion.
 
 Real-time Feedback – Instant toast notifications for all actions.
+
 
 🛠️ Technical Architecture
 🔙 Backend (Java)
@@ -40,6 +46,7 @@ Centralized CORS configuration
 
 Clean separation of concerns
 
+
 🔜 Frontend (React 19)
 
 Functional Components + Hooks
@@ -49,6 +56,7 @@ Custom lightweight Vanilla CSS design system
 Authentication state management
 
 Real-time fleet synchronization
+
 
 📂 Project Structure
 CAR RENT/
@@ -65,7 +73,10 @@ CAR RENT/
 │   └── src/components/      # Reusable Components
 │
 └── Car pics/                # Binary Image Storage
+
+
 🚀 Quick Start
+
 1️⃣ Backend Setup
 cd backend_rent/src
 javac Main.java
