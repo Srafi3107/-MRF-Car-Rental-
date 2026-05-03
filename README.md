@@ -64,3 +64,15 @@ CAR RENT/
 1. **Backend**: Compile and run `Main.java` inside `backend_rent/src/`. The server will start on port `8080`.
 2. **Frontend**: Run `npm install` and `npm start` in the `frontend/` directory.
 3. **Verify**: Log in as `admin` (password: `admin123`) to access the Security Panel and approve reset requests!
+
+
+
+🔮 Future Enhancements
+
+🤖 AI-Powered Assistant & Smart UI
+AI Assistant Integration: Embed an intelligent assistant (chat-based) to help users:
+Find available cars based on natural language queries (e.g., “SUV under $50 for 3 days”)
+Get booking suggestions and pricing insights
+AI-Driven Recommendations: Personalized vehicle recommendations using user behavior and booking history
+Smart Search & Filtering: Semantic search instead of basic keyword filtering
+Voice UI (Optional): Enable voice-based booking interactions for improved accessibility
