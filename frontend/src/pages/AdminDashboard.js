@@ -11,19 +11,19 @@ import { toast } from "sonner";
 
 /* ─── Shared Styles ─────────────────────────────────────────────── */
 const card = {
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.07)",
+    background: "rgba(0,0,0,0.02)",
+    border: "1px solid rgba(0,0,0,0.05)",
     borderRadius: "1.25rem",
     overflow: "hidden",
 };
 
 const inputStyle = {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
+    background: "rgba(0,0,0,0.03)",
+    border: "1px solid rgba(0,0,0,0.08)",
     borderRadius: "10px",
     padding: "0.6rem 1rem",
-    color: "#f0f4ff",
+    color: "var(--col-foreground)",
     fontSize: "0.875rem",
     outline: "none",
 };
@@ -31,7 +31,7 @@ const inputStyle = {
 const labelStyle = {
     fontSize: "0.7rem",
     fontWeight: 700,
-    color: "#94a3b8",
+    color: "var(--col-muted)",
     textTransform: "uppercase",
     letterSpacing: "0.08em",
     marginBottom: "0.35rem",
@@ -42,18 +42,19 @@ const thStyle = {
     padding: "0.875rem 1.25rem",
     fontSize: "0.7rem",
     fontWeight: 700,
-    color: "#94a3b8",
+    color: "var(--col-muted)",
     textTransform: "uppercase",
     letterSpacing: "0.1em",
     textAlign: "left",
-    background: "rgba(255,255,255,0.04)",
-    borderBottom: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(0,0,0,0.02)",
+    borderBottom: "1px solid rgba(0,0,0,0.05)",
 };
 
 const tdStyle = {
     padding: "0.875rem 1.25rem",
-    borderBottom: "1px solid rgba(255,255,255,0.04)",
+    borderBottom: "1px solid rgba(0,0,0,0.02)",
     fontSize: "0.875rem",
+    color: "var(--col-foreground)",
 };
 
 /* ─── Vehicle Modal ─────────────────────────────────────────────── */
@@ -123,8 +124,8 @@ const VehicleModal = ({ car, onClose, onSaved }) => {
             zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem",
         }} onClick={onClose}>
             <div style={{
-                background: "linear-gradient(135deg, #0f2044 0%, #0a192f 100%)",
-                border: "1px solid rgba(255,255,255,0.1)",
+                background: "var(--col-bg)",
+                border: "1px solid rgba(0,0,0,0.1)",
                 borderRadius: "1.5rem",
                 padding: "2rem",
                 width: "100%",
@@ -133,7 +134,7 @@ const VehicleModal = ({ car, onClose, onSaved }) => {
                 overflowY: "auto",
             }} onClick={e => e.stopPropagation()}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.75rem" }}>
-                    <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#fff" }}>
+                    <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--col-foreground)" }}>
                         {isEdit ? "Edit Vehicle" : "Add New Vehicle"}
                     </h3>
                     <Button variant="ghost" size="icon" onClick={onClose}><X size={20} /></Button>
@@ -241,11 +242,11 @@ const AdminDashboard = () => {
             {/* Header */}
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1.5rem", marginBottom: "2.5rem" }}>
                 <div>
-                    <h1 style={{ fontSize: "1.875rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.025em" }}>Admin Console</h1>
-                    <p style={{ color: "#94a3b8", marginTop: "0.25rem" }}>Manage your fleet and track performance</p>
+                    <h1 style={{ fontSize: "1.875rem", fontWeight: 800, color: "var(--col-foreground)", letterSpacing: "-0.025em" }}>Admin Console</h1>
+                    <p style={{ color: "var(--col-muted)", marginTop: "0.25rem" }}>Manage your fleet and track performance</p>
                 </div>
                 {/* Tab bar */}
-                <div style={{ display: "flex", background: "rgba(255,255,255,0.05)", padding: "4px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.08)", gap: "4px", overflowX: "auto" }}>
+                <div style={{ display: "flex", background: "rgba(0,0,0,0.03)", padding: "4px", borderRadius: "12px", border: "1px solid rgba(0,0,0,0.05)", gap: "4px", overflowX: "auto" }}>
                     {tabs.map(tab => (
                         <button key={tab.path} onClick={() => navigate(tab.path)} style={{
                             display: "flex", alignItems: "center", gap: "0.4rem",
@@ -254,7 +255,7 @@ const AdminDashboard = () => {
                             whiteSpace: "nowrap",
                             border: "none",
                             background: isActive(tab.path) ? "var(--col-primary)" : "transparent",
-                            color: isActive(tab.path) ? "#fff" : "#94a3b8",
+                            color: isActive(tab.path) ? "#fff" : "var(--col-muted)",
                             transition: "all 0.2s",
                         }}>
                             {tab.icon} {tab.name}
@@ -316,16 +317,16 @@ const DashboardOverview = () => {
                             </div>
                             <TrendingUp size={14} style={{ color: "#10b981" }} />
                         </div>
-                        <p style={{ fontSize: "0.75rem", color: "#94a3b8", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>{s.title}</p>
-                        <p style={{ fontSize: "1.875rem", fontWeight: 800, color: "#fff", marginTop: "0.25rem" }}>{s.value}</p>
+                        <p style={{ fontSize: "0.75rem", color: "var(--col-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>{s.title}</p>
+                        <p style={{ fontSize: "1.875rem", fontWeight: 800, color: "var(--col-foreground)", marginTop: "0.25rem" }}>{s.value}</p>
                     </div>
                 ))}
             </div>
 
             {/* Recent Bookings */}
             <div style={card}>
-                <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid rgba(255,255,255,0.07)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <h3 style={{ fontWeight: 700, color: "#fff" }}>Recent Reservations</h3>
+                <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid rgba(0,0,0,0.05)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <h3 style={{ fontWeight: 700, color: "var(--col-foreground)" }}>Recent Reservations</h3>
                     <Link to="/admin/bookings" style={{ fontSize: "0.8rem", color: "var(--col-primary)", fontWeight: 600 }}>View All →</Link>
                 </div>
                 <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -340,14 +341,14 @@ const DashboardOverview = () => {
                         )}
                         {recent.map(b => (
                             <tr key={b.id} style={{ transition: "background 0.15s" }}>
-                                <td style={tdStyle}><span style={{ color: "#94a3b8", fontFamily: "monospace" }}>#{b.id?.slice(-6)}</span></td>
-                                <td style={{ ...tdStyle, color: "#fff", fontWeight: 600 }}>{b.customerName || b.userId || "—"}</td>
+                                <td style={tdStyle}><span style={{ color: "var(--col-muted)", fontFamily: "monospace" }}>#{b.id?.slice(-6)}</span></td>
+                                <td style={{ ...tdStyle, color: "var(--col-foreground)", fontWeight: 600 }}>{b.customerName || b.userId || "—"}</td>
                                 <td style={tdStyle}>
                                     <Badge variant={b.status === "COMPLETED" ? "success" : b.status === "CANCELLED" ? "danger" : b.status === "APPROVED" ? "default" : "warning"}>
                                         {b.status}
                                     </Badge>
                                 </td>
-                                <td style={{ ...tdStyle, color: "#fff", fontWeight: 700 }}>${b.totalPrice ?? "—"}</td>
+                                <td style={{ ...tdStyle, color: "var(--col-foreground)", fontWeight: 700 }}>${b.totalPrice ?? "—"}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -435,12 +436,12 @@ const CarManager = () => {
                                                 )}
                                             </div>
                                             <div>
-                                                <div style={{ fontWeight: 700, color: "#fff" }}>{c.brand} {c.model}</div>
+                                                <div style={{ fontWeight: 700, color: "var(--col-foreground)" }}>{c.brand} {c.model}</div>
                                                 <div style={{ fontSize: "0.75rem", color: "#64748b" }}>ID: {c.id?.slice(-6)}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td style={{ ...tdStyle, fontWeight: 700, color: "#fff" }}>${c.pricePerDay}</td>
+                                    <td style={{ ...tdStyle, fontWeight: 700, color: "var(--col-foreground)" }}>${c.pricePerDay}</td>
                                     <td style={tdStyle}>
                                         <Badge variant={c.isAvailable ? "success" : "danger"}>
                                             {c.isAvailable ? "Available" : "Rented"}
@@ -517,10 +518,10 @@ const BookingList = () => {
                     )}
                     {bookings.map(b => (
                         <tr key={b.id}>
-                            <td style={tdStyle}><span style={{ fontFamily: "monospace", color: "#94a3b8" }}>#{b.id?.slice(-6)}</span></td>
-                            <td style={{ ...tdStyle, color: "#fff", fontWeight: 600 }}>{b.customerName || b.userId || "—"}</td>
+                            <td style={tdStyle}><span style={{ fontFamily: "monospace", color: "var(--col-muted)" }}>#{b.id?.slice(-6)}</span></td>
+                            <td style={{ ...tdStyle, color: "var(--col-foreground)", fontWeight: 600 }}>{b.customerName || b.userId || "—"}</td>
                             <td style={{ ...tdStyle, color: "#cbd5e1" }}>{b.carId}</td>
-                            <td style={{ ...tdStyle, fontWeight: 700, color: "#fff" }}>${b.totalPrice}</td>
+                            <td style={{ ...tdStyle, fontWeight: 700, color: "var(--col-foreground)" }}>${b.totalPrice}</td>
                             <td style={tdStyle}>
                                 <Badge variant={b.status === "COMPLETED" ? "success" : b.status === "CANCELLED" ? "danger" : b.status === "APPROVED" ? "default" : "warning"}>
                                     {b.status}
@@ -586,14 +587,14 @@ const CustomerList = () => {
                     {users.map(u => (
                         <tr key={u.id}>
                             <td style={tdStyle}>
-                                <div style={{ fontWeight: 700, color: "#fff" }}>{u.name || "—"}</div>
+                                <div style={{ fontWeight: 700, color: "var(--col-foreground)" }}>{u.name || "—"}</div>
                                 <div style={{ fontSize: "0.7rem", color: "#64748b" }}>#{u.id?.slice(-6)}</div>
                             </td>
                             <td style={tdStyle}>
                                 <div style={{ color: "#cbd5e1" }}>{u.email || "—"}</div>
                                 <div style={{ fontSize: "0.75rem", color: "#64748b" }}>{u.phone || "—"}</div>
                             </td>
-                            <td style={{ ...tdStyle, color: "#94a3b8" }}>{u.username}</td>
+                            <td style={{ ...tdStyle, color: "var(--col-muted)" }}>{u.username}</td>
                             <td style={tdStyle}>
                                 <Button variant="danger" size="sm" onClick={() => del(u.id)}>Delete</Button>
                             </td>
@@ -640,7 +641,7 @@ const SecurityPanel = () => {
     return (
         <div style={card}>
             <div style={{ padding: "1.5rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#fff", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--col-foreground)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     <ShieldAlert size={18} color="#f59e0b" /> Password Reset Approvals
                 </h3>
                 <p style={{ fontSize: "0.875rem", color: "#64748b", marginTop: "0.25rem" }}>
@@ -658,13 +659,13 @@ const SecurityPanel = () => {
                     {requests.map(u => (
                         <tr key={u.id}>
                             <td style={tdStyle}>
-                                <div style={{ fontWeight: 700, color: "#fff" }}>{u.username}</div>
+                                <div style={{ fontWeight: 700, color: "var(--col-foreground)" }}>{u.username}</div>
                                 <div style={{ fontSize: "0.75rem", color: "#64748b" }}>{u.name || "Customer"}</div>
                             </td>
                             <td style={tdStyle}>
                                 <div style={{ color: "#cbd5e1" }}>{u.email}</div>
                             </td>
-                            <td style={{ ...tdStyle, color: "#94a3b8" }}>Pending Approval</td>
+                            <td style={{ ...tdStyle, color: "var(--col-muted)" }}>Pending Approval</td>
                             <td style={tdStyle}>
                                 <Button size="sm" variant="primary" onClick={() => approve(u.id)} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                                     <Check size={14} /> Approve Reset

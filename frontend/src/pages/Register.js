@@ -62,7 +62,7 @@ const Register = () => {
                         animate={{ opacity: 1, x: 0 }}
                         className="glass-card border-white/10 p-8 max-w-md"
                     >
-                        <h3 className="text-white text-2xl font-bold mb-4">Join the Elite</h3>
+                        <h3 className="text-foreground text-2xl font-bold mb-4">Join the Elite</h3>
                         <p className="text-slate-300 text-lg leading-relaxed mb-6">
                             Register today to unlock exclusive rates, skip the queue, and access our premium world-wide fleet.
                         </p>
@@ -75,7 +75,7 @@ const Register = () => {
                                 ))}
                             </div>
                             <div className="text-sm">
-                                <p className="text-white font-bold">15,000+ members</p>
+                                <p className="text-foreground font-bold">15,000+ members</p>
                                 <p className="text-slate-400">already joined us</p>
                             </div>
                         </div>
@@ -97,11 +97,11 @@ const Register = () => {
                             <div className="bg-primary p-1.5 rounded-lg group-hover:rotate-12 transition-transform">
                                 <Car className="text-primary-foreground h-5 w-5" />
                             </div>
-                            <span className="text-lg font-bold tracking-tight text-white">
+                            <span className="text-lg font-bold tracking-tight text-foreground">
                                 MRF<span className="text-primary">RENTAL</span>
                             </span>
                         </Link>
-                        <h2 className="text-3xl font-bold text-white tracking-tight">Create Account</h2>
+                        <h2 className="text-3xl font-bold text-foreground tracking-tight">Create Account</h2>
                         <p className="text-slate-400">Join our premium car rental community</p>
                     </div>
 

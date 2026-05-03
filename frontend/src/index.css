@@ -27,11 +27,11 @@
   --col-primary: hsl(217.2, 91.2%, 59.8%);
   --col-primary-dim: hsla(217.2, 91.2%, 59.8%, 0.2);
   --col-primary-shadow: hsla(217.2, 91.2%, 59.8%, 0.25);
-  --col-bg: #070f1f;
-  --col-navy-900: #0A192F;
-  --col-navy-800: #112240;
-  --col-navy-700: #1D2D50;
-  --col-foreground: #f0f4ff;
+  --col-bg: #ffffff;
+  --col-navy-900: #f8fafc;
+  --col-navy-800: #f1f5f9;
+  --col-navy-700: #e2e8f0;
+  --col-foreground: #0f172a;
   --col-muted: #64748b;
   --col-success: #10b981;
   --col-warning: #f59e0b;
@@ -64,10 +64,6 @@ html {
 body {
   font-family: 'Inter', 'Poppins', sans-serif;
   background-color: var(--col-bg);
-  background-image:
-    radial-gradient(at 0% 0%, hsla(217, 100%, 10%, 1) 0, transparent 50%),
-    radial-gradient(at 50% 0%, hsla(222, 47%, 5%, 1) 0, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(217, 100%, 10%, 1) 0, transparent 50%);
   color: var(--col-foreground);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -114,27 +110,27 @@ h6 {
 
 /* ─── Glass Components ───────────────────────────────────────── */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   border-radius: var(--radius-2xl);
   padding: 1.5rem;
   transition: var(--transition-slow);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* ─── Text Gradient ──────────────────────────────────────────── */
@@ -1084,15 +1080,15 @@ h6 {
 }
 
 .bg-white\/5 {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 .bg-white\/10 {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.06);
 }
 
 .bg-white\/20 {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .bg-primary\/10 {
@@ -1199,7 +1195,7 @@ h6 {
 }
 
 .border-t {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .border-none {
@@ -1215,15 +1211,15 @@ h6 {
 }
 
 .border-white\/5 {
-  border-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 0, 0, 0.05);
 }
 
 .border-white\/10 {
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 .border-white\/20 {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 .border-primary {
@@ -1247,7 +1243,7 @@ h6 {
 }
 
 .divide-y>*+* {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .divide-white\/5>*+* {
@@ -1364,15 +1360,15 @@ h6 {
 
 /* ─── Hover States ───────────────────────────────────────────── */
 .hover\:bg-white\/5:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 .hover\:bg-white\/10:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.06);
 }
 
 .hover\:bg-white\/20:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .hover\:scale-105:hover {
@@ -1486,10 +1482,10 @@ h6 {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background: rgba(7, 15, 31, 0.85);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .navbar-logo {
@@ -1499,7 +1495,7 @@ h6 {
   font-weight: 700;
   font-size: 1.125rem;
   letter-spacing: -0.025em;
-  color: #fff;
+  color: var(--col-foreground);
 }
 
 .navbar-logo .logo-icon {
@@ -1531,7 +1527,7 @@ h6 {
 
 .navbar-link:hover,
 .navbar-link.active {
-  color: #fff;
+  color: var(--col-primary);
 }
 
 .navbar-actions {
@@ -1546,9 +1542,9 @@ h6 {
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--col-foreground);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;

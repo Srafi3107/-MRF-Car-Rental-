@@ -53,11 +53,11 @@ const Login = () => {
                             <div className="bg-primary p-1.5 rounded-lg group-hover:rotate-12 transition-transform">
                                 <Car className="text-primary-foreground h-5 w-5" />
                             </div>
-                            <span className="text-lg font-bold tracking-tight text-white">
+                            <span className="text-lg font-bold tracking-tight text-foreground">
                                 MRF<span className="text-primary">RENTAL</span>
                             </span>
                         </Link>
-                        <h2 className="text-3xl font-bold text-white tracking-tight">Welcome Back</h2>
+                        <h2 className="text-3xl font-bold text-foreground tracking-tight">Welcome Back</h2>
                         <p className="text-slate-400">Enter your credentials to access your account</p>
                     </div>
 
@@ -129,13 +129,13 @@ const Login = () => {
                         transition={{ delay: 0.3 }}
                         className="glass-card border-white/10 p-8 max-w-md"
                     >
-                        <p className="text-white text-xl font-medium leading-relaxed italic mb-4">
+                        <p className="text-foreground text-xl font-medium leading-relaxed italic mb-4">
                             "The best car rental experience I've ever had. Truly professional and premium service."
                         </p>
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">JD</div>
+                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-foreground font-bold">JD</div>
                             <div>
-                                <p className="text-white font-bold text-sm">John D.</p>
+                                <p className="text-foreground font-bold text-sm">John D.</p>
                                 <p className="text-slate-400 text-xs">Verified Customer</p>
                             </div>
                         </div>

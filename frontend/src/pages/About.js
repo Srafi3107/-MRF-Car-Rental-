@@ -14,7 +14,7 @@ const About = () => {
                     className="space-y-6"
                 >
                     <span className="text-primary font-bold uppercase tracking-widest text-sm">Our Story</span>
-                    <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                    <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
                         Redefining the <span className="text-gradient">Rental Experience</span> Since 2024
                     </h2>
                     <p className="text-slate-400 leading-relaxed">
@@ -51,7 +51,7 @@ const About = () => {
                         <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4">
                             {stat.icon}
                         </div>
-                        <div className="text-3xl font-bold text-white mb-1">{stat.val}</div>
+                        <div className="text-3xl font-bold text-foreground mb-1">{stat.val}</div>
                         <div className="text-sm text-slate-500 font-medium">{stat.label}</div>
                     </div>
                 ))}
@@ -59,7 +59,7 @@ const About = () => {
 
             {/* Mission */}
             <section className="text-center max-w-3xl mx-auto space-y-6">
-                <h2 className="text-4xl font-bold text-white">Our Mission</h2>
+                <h2 className="text-4xl font-bold text-foreground">Our Mission</h2>
                 <p className="text-lg text-slate-400 leading-relaxed italic">
                     "To provide unparalleled freedom of movement through a world-class fleet and a customer-first digital experience, where luxury meets convenience at every touchpoint."
                 </p>

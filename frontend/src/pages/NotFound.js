@@ -15,7 +15,7 @@ const NotFound = () => {
                 transition={{ duration: 0.5 }}
                 className="relative mb-10"
             >
-                <div className="text-[10rem] font-black text-white/5 select-none leading-none">404</div>
+                <div className="text-[10rem] font-black text-foreground/5 select-none leading-none">404</div>
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="p-8 rounded-full bg-rose-500/10 text-rose-500">
                         <Ban size={80} />
@@ -29,7 +29,7 @@ const NotFound = () => {
                 transition={{ delay: 0.2 }}
                 className="space-y-6 max-w-md"
             >
-                <h1 className="text-4xl font-bold text-white">Lost in the Fast Lane?</h1>
+                <h1 className="text-4xl font-bold text-foreground">Lost in the Fast Lane?</h1>
                 <p className="text-slate-400 text-lg">
                     The page you're looking for seems to have taken a different route. Let's get you back on track.
                 </p>

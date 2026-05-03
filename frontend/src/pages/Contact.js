@@ -15,7 +15,7 @@ const Contact = () => {
                     className="space-y-12"
                 >
                     <div className="space-y-6">
-                        <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+                        <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
                             Get in <span className="text-gradient">Touch</span>
                         </h1>
                         <p className="text-slate-400 text-lg max-w-md leading-relaxed">
@@ -29,7 +29,7 @@ const Contact = () => {
                                 <Mail size={24} />
                             </div>
                             <div>
-                                <h4 className="text-white font-bold mb-1">Email Us</h4>
+                                <h4 className="text-foreground font-bold mb-1">Email Us</h4>
                                 <p className="text-slate-400 text-sm">support@mrfrental.com</p>
                                 <p className="text-slate-400 text-sm">partners@mrfrental.com</p>
                             </div>
@@ -40,7 +40,7 @@ const Contact = () => {
                                 <Phone size={24} />
                             </div>
                             <div>
-                                <h4 className="text-white font-bold mb-1">Call Us</h4>
+                                <h4 className="text-foreground font-bold mb-1">Call Us</h4>
                                 <p className="text-slate-400 text-sm">+1 (555) 000-8888</p>
                                 <p className="text-slate-400 text-sm">Mon - Fri, 9am - 6pm EST</p>
                             </div>
@@ -51,7 +51,7 @@ const Contact = () => {
                                 <MapPin size={24} />
                             </div>
                             <div>
-                                <h4 className="text-white font-bold mb-1">Visit Us</h4>
+                                <h4 className="text-foreground font-bold mb-1">Visit Us</h4>
                                 <p className="text-slate-400 text-sm">123 Luxury Drive</p>
                                 <p className="text-slate-400 text-sm">Beverly Hills, CA 90210</p>
                             </div>

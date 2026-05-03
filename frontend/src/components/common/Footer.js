@@ -13,7 +13,7 @@ const Footer = () => {
     return (
         <footer style={{
             backgroundColor: "var(--col-navy-900)",
-            borderTop: "1px solid rgba(255,255,255,0.08)",
+            borderTop: "1px solid rgba(0,0,0,0.05)",
             padding: "4rem 2rem 2rem",
         }}>
             <div style={{ maxWidth: "80rem", margin: "0 auto" }}>
@@ -30,7 +30,7 @@ const Footer = () => {
                             <div style={{ background: "var(--col-primary)", padding: "8px", borderRadius: "10px" }}>
                                 <Car style={{ color: "#fff", width: 22, height: 22 }} />
                             </div>
-                            <span style={{ fontSize: "1.125rem", fontWeight: 700, color: "#fff" }}>
+                            <span style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--col-foreground)" }}>
                                 MRF<span style={{ color: "var(--col-primary)" }}>RENTAL</span>
                             </span>
                         </Link>
@@ -55,7 +55,7 @@ const Footer = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 style={{ color: "#fff", fontWeight: 600, marginBottom: "1.5rem" }}>Quick Links</h4>
+                        <h4 style={{ color: "var(--col-foreground)", fontWeight: 600, marginBottom: "1.5rem" }}>Quick Links</h4>
                         <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                             {[["Our Fleet", "/fleet"], ["About Us", "/about"], ["Contact", "/contact"]].map(([label, path]) => (
                                 <li key={path}><Link to={path} style={linkStyle}>{label}</Link></li>
@@ -65,7 +65,7 @@ const Footer = () => {
 
                     {/* Services */}
                     <div>
-                        <h4 style={{ color: "#fff", fontWeight: 600, marginBottom: "1.5rem" }}>Services</h4>
+                        <h4 style={{ color: "var(--col-foreground)", fontWeight: 600, marginBottom: "1.5rem" }}>Services</h4>
                         <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                             {["Luxury Rentals", "Business Fleet", "Airport Transfer", "Chauffeur Service"].map(s => (
                                 <li key={s}><a href="#" style={linkStyle}>{s}</a></li>
@@ -75,7 +75,7 @@ const Footer = () => {
 
                     {/* Contact */}
                     <div>
-                        <h4 style={{ color: "#fff", fontWeight: 600, marginBottom: "1.5rem" }}>Contact Us</h4>
+                        <h4 style={{ color: "var(--col-foreground)", fontWeight: 600, marginBottom: "1.5rem" }}>Contact Us</h4>
                         <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                             {[
                                 { Icon: MapPin, text: "123 Luxury Drive, Beverly Hills, CA" },
@@ -94,7 +94,7 @@ const Footer = () => {
                 {/* Bottom bar */}
                 <div style={{
                     paddingTop: "2rem",
-                    borderTop: "1px solid rgba(255,255,255,0.05)",
+                    borderTop: "1px solid rgba(0,0,0,0.05)",
                     display: "flex",
                     flexWrap: "wrap",
                     justifyContent: "space-between",

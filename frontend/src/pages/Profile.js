@@ -43,7 +43,7 @@ const Profile = () => {
     return (
         <div className="max-w-4xl mx-auto px-6 py-12 space-y-10">
             <div className="space-y-2">
-                <h1 className="text-3xl font-bold text-white tracking-tight">Account Settings</h1>
+                <h1 className="text-3xl font-bold text-foreground tracking-tight">Account Settings</h1>
                 <p className="text-slate-400">Manage your profile information and preferences</p>
             </div>
 
@@ -54,12 +54,12 @@ const Profile = () => {
                         <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform duration-300">
                             <UserCircle size={64} />
                         </div>
-                        <div className="absolute bottom-0 right-0 p-1.5 bg-primary text-white rounded-full border-4 border-navy-900 shadow-xl">
+                        <div className="absolute bottom-0 right-0 p-1.5 bg-primary text-foreground rounded-full border-4 border-white shadow-xl">
                             <Shield size={12} />
                         </div>
                     </div>
                     <div className="space-y-1">
-                        <h3 className="text-xl font-bold text-white">{user?.name || user?.username}</h3>
+                        <h3 className="text-xl font-bold text-foreground">{user?.name || user?.username}</h3>
                         <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">{user?.role || "Member"}</p>
                     </div>
                     <div className="w-full pt-6 border-t border-white/10 space-y-4 text-left">

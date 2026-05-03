@@ -11,17 +11,17 @@ import { useNavigate } from "react-router-dom";
 /* ─── Booking Modal (inline in Fleet for unauthenticated redirect support) ── */
 const inputStyle = {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
+    background: "rgba(0,0,0,0.03)",
+    border: "1px solid rgba(0,0,0,0.08)",
     borderRadius: "10px",
     padding: "0.6rem 1rem",
-    color: "#f0f4ff",
+    color: "var(--col-foreground)",
     fontSize: "0.875rem",
     outline: "none",
 };
 
 const labelStyle = {
-    fontSize: "0.7rem", fontWeight: 700, color: "#94a3b8",
+    fontSize: "0.7rem", fontWeight: 700, color: "var(--col-muted)",
     textTransform: "uppercase", letterSpacing: "0.08em",
     marginBottom: "0.35rem", display: "block",
 };
@@ -59,9 +59,9 @@ const FleetBookingModal = ({ car, user, onClose, onBooked }) => {
 
     return (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.75)", zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem" }} onClick={onClose}>
-            <div style={{ background: "linear-gradient(135deg, #0f2044, #0a192f)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "1.5rem", padding: "2rem", width: "100%", maxWidth: "28rem" }} onClick={e => e.stopPropagation()}>
-                <h3 style={{ color: "#fff", fontWeight: 700, fontSize: "1.25rem", marginBottom: "0.25rem" }}>Book {car.brand} {car.model}</h3>
-                <p style={{ color: "#94a3b8", fontSize: "0.875rem", marginBottom: "1.25rem" }}>${car.pricePerDay} / day</p>
+            <div style={{ background: "var(--col-bg)", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "1.5rem", padding: "2rem", width: "100%", maxWidth: "28rem" }} onClick={e => e.stopPropagation()}>
+                <h3 style={{ color: "var(--col-foreground)", fontWeight: 700, fontSize: "1.25rem", marginBottom: "0.25rem" }}>Book {car.brand} {car.model}</h3>
+                <p style={{ color: "var(--col-muted)", fontSize: "0.875rem", marginBottom: "1.25rem" }}>${car.pricePerDay} / day</p>
                 <img src={car.imageUrl || "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80"} alt="" style={{ width: "100%", height: "9rem", objectFit: "cover", borderRadius: "10px", marginBottom: "1.5rem" }} />
                 <form onSubmit={handleBook} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
@@ -88,8 +88,8 @@ const FleetBookingModal = ({ car, user, onClose, onBooked }) => {
                     </div>
                     {days > 0 && (
                         <div style={{ background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.2)", borderRadius: "10px", padding: "0.75rem 1rem", display: "flex", justifyContent: "space-between" }}>
-                            <span style={{ color: "#94a3b8", fontSize: "0.875rem" }}>{days} day(s) × ${car.pricePerDay}</span>
-                            <span style={{ color: "#fff", fontWeight: 800 }}>= ${total.toFixed(2)}</span>
+                            <span style={{ color: "var(--col-muted)", fontSize: "0.875rem" }}>{days} day(s) × ${car.pricePerDay}</span>
+                            <span style={{ color: "var(--col-foreground)", fontWeight: 800 }}>= ${total.toFixed(2)}</span>
                         </div>
                     )}
                     <div style={{ display: "flex", gap: "0.75rem" }}>
@@ -140,10 +140,10 @@ const Fleet = () => {
         <div style={{ maxWidth: "80rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
             {/* Header */}
             <div style={{ marginBottom: "2.5rem" }}>
-                <h1 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 800, color: "#fff", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+                <h1 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 800, color: "var(--col-foreground)", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
                     Our Premium <span style={{ color: "var(--col-primary)" }}>Fleet</span>
                 </h1>
-                <p style={{ color: "#94a3b8", marginTop: "0.75rem", maxWidth: "36rem" }}>
+                <p style={{ color: "var(--col-muted)", marginTop: "0.75rem", maxWidth: "36rem" }}>
                     Choose from our curated collection of world-class vehicles. From sports cars to luxury SUVs.
                 </p>
             </div>
@@ -173,9 +173,9 @@ const Fleet = () => {
                         <button key={b} onClick={() => setFilter(b)} style={{
                             padding: "0.4rem 1rem", borderRadius: "999px", fontSize: "0.8rem", fontWeight: 600,
                             border: "1px solid",
-                            borderColor: filter === b ? "transparent" : "rgba(255,255,255,0.1)",
-                            background: filter === b ? "var(--col-primary)" : "rgba(255,255,255,0.05)",
-                            color: filter === b ? "#fff" : "#94a3b8",
+                            borderColor: filter === b ? "transparent" : "rgba(0,0,0,0.08)",
+                            background: filter === b ? "var(--col-primary)" : "rgba(0,0,0,0.03)",
+                            color: filter === b ? "#fff" : "var(--col-muted)",
                             cursor: "pointer", transition: "all 0.2s",
                         }}>{b}</button>
                     ))}
@@ -196,7 +196,7 @@ const Fleet = () => {
             ) : filtered.length === 0 ? (
                 <div style={{ textAlign: "center", padding: "5rem 2rem", color: "#64748b" }}>
                     <Filter size={48} style={{ margin: "0 auto 1rem", opacity: 0.4 }} />
-                    <h3 style={{ color: "#fff", marginBottom: "0.5rem" }}>No cars found</h3>
+                    <h3 style={{ color: "var(--col-foreground)", marginBottom: "0.5rem" }}>No cars found</h3>
                     <Button variant="primary" onClick={() => { setSearch(""); setFilter("All"); }}>Clear Filters</Button>
                 </div>
             ) : (
@@ -211,8 +211,8 @@ const Fleet = () => {
                                 transition={{ delay: i * 0.03 }}
                                 whileHover={{ y: -6 }}
                                 style={{
-                                    background: "rgba(255,255,255,0.04)",
-                                    border: "1px solid rgba(255,255,255,0.07)",
+                                    background: "rgba(0,0,0,0.02)",
+                                    border: "1px solid rgba(0,0,0,0.05)",
                                     borderRadius: "1.25rem",
                                     overflow: "hidden",
                                     display: "flex",
@@ -260,12 +260,12 @@ const Fleet = () => {
                                 <div style={{ padding: "1.25rem", flexGrow: 1, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                                         <div>
-                                            <h3 style={{ fontWeight: 700, color: "#fff", fontSize: "1rem" }}>{car.brand} {car.model}</h3>
-                                            <p style={{ fontSize: "0.75rem", color: "#94a3b8" }}>Luxury Vehicle</p>
+                                            <h3 style={{ fontWeight: 700, color: "var(--col-foreground)", fontSize: "1rem" }}>{car.brand} {car.model}</h3>
+                                            <p style={{ fontSize: "0.75rem", color: "var(--col-muted)" }}>Luxury Vehicle</p>
                                         </div>
                                         <div style={{ textAlign: "right" }}>
-                                            <span style={{ fontWeight: 800, color: "#fff" }}>${car.pricePerDay}</span>
-                                            <span style={{ fontSize: "0.7rem", color: "#64748b", display: "block" }}>/day</span>
+                                            <span style={{ fontWeight: 800, color: "var(--col-foreground)" }}>${car.pricePerDay}</span>
+                                            <span style={{ fontSize: "0.7rem", color: "var(--col-muted)", display: "block" }}>/day</span>
                                         </div>
                                     </div>
 

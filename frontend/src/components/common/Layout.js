@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
             </main>
 
             {!isAuthPage && <Footer />}
-            <Toaster position="top-center" richColors theme="dark" />
+            <Toaster position="top-center" richColors theme="light" />
         </div>
     );
 };

@@ -12,19 +12,19 @@ import { toast } from "sonner";
 
 /* ─── Shared Styles ─────────────────────────────────────────── */
 const card = {
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.07)",
+    background: "rgba(0,0,0,0.02)",
+    border: "1px solid rgba(0,0,0,0.05)",
     borderRadius: "1.25rem",
     overflow: "hidden",
 };
 
 const inputStyle = {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
+    background: "rgba(0,0,0,0.03)",
+    border: "1px solid rgba(0,0,0,0.08)",
     borderRadius: "10px",
     padding: "0.6rem 1rem",
-    color: "#f0f4ff",
+    color: "var(--col-foreground)",
     fontSize: "0.875rem",
     outline: "none",
 };
@@ -32,7 +32,7 @@ const inputStyle = {
 const labelStyle = {
     fontSize: "0.7rem",
     fontWeight: 700,
-    color: "#94a3b8",
+    color: "var(--col-muted)",
     textTransform: "uppercase",
     letterSpacing: "0.08em",
     marginBottom: "0.35rem",
@@ -83,8 +83,8 @@ const BookingModal = ({ car, user, onClose, onBooked }) => {
             zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem",
         }} onClick={onClose}>
             <div style={{
-                background: "linear-gradient(135deg, #0f2044 0%, #0a192f 100%)",
-                border: "1px solid rgba(255,255,255,0.12)",
+                background: "var(--col-bg)",
+                border: "1px solid rgba(0,0,0,0.08)",
                 borderRadius: "1.5rem",
                 padding: "2rem",
                 width: "100%",
@@ -93,8 +93,8 @@ const BookingModal = ({ car, user, onClose, onBooked }) => {
                 {/* Header */}
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem" }}>
                     <div>
-                        <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#fff" }}>Book This Car</h3>
-                        <p style={{ color: "#94a3b8", fontSize: "0.875rem", marginTop: "0.25rem" }}>
+                        <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--col-foreground)" }}>Book This Car</h3>
+                        <p style={{ color: "var(--col-muted)", fontSize: "0.875rem", marginTop: "0.25rem" }}>
                             {car.brand} {car.model} — ${car.pricePerDay}/day
                         </p>
                     </div>
@@ -154,8 +154,8 @@ const BookingModal = ({ car, user, onClose, onBooked }) => {
                             alignItems: "center",
                         }}>
                             <div>
-                                <p style={{ color: "#94a3b8", fontSize: "0.75rem" }}>{days} day(s) × ${car.pricePerDay}</p>
-                                <p style={{ color: "#fff", fontWeight: 800, fontSize: "1.25rem", marginTop: "2px" }}>
+                                <p style={{ color: "var(--col-muted)", fontSize: "0.75rem" }}>{days} day(s) × ${car.pricePerDay}</p>
+                                <p style={{ color: "var(--col-foreground)", fontWeight: 800, fontSize: "1.25rem", marginTop: "2px" }}>
                                     Total: ${total.toFixed(2)}
                                 </p>
                             </div>
@@ -197,7 +197,7 @@ const RatingModal = ({ booking, onClose, onRated }) => {
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.75)", zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem" }} onClick={onClose}>
             <div style={{ background: "linear-gradient(135deg, #0f2044, #0a192f)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "1.5rem", padding: "2rem", width: "100%", maxWidth: "26rem" }} onClick={e => e.stopPropagation()}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
-                    <h3 style={{ color: "#fff", fontWeight: 700, fontSize: "1.125rem" }}>Rate Your Experience</h3>
+                    <h3 style={{ color: "var(--col-foreground)", fontWeight: 700, fontSize: "1.125rem" }}>Rate Your Experience</h3>
                     <Button variant="ghost" size="icon" onClick={onClose}><X size={20} /></Button>
                 </div>
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
@@ -246,10 +246,10 @@ const CustomerDashboard = () => {
             {/* Header + Tabs */}
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1.5rem", marginBottom: "2.5rem" }}>
                 <div>
-                    <h1 style={{ fontSize: "1.875rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.025em" }}>My Journey</h1>
-                    <p style={{ color: "#94a3b8", marginTop: "0.25rem" }}>Manage your rentals and explore the fleet</p>
+                    <h1 style={{ fontSize: "1.875rem", fontWeight: 800, color: "var(--col-foreground)", letterSpacing: "-0.025em" }}>My Journey</h1>
+                    <p style={{ color: "var(--col-muted)", marginTop: "0.25rem" }}>Manage your rentals and explore the fleet</p>
                 </div>
-                <div style={{ display: "flex", background: "rgba(255,255,255,0.05)", padding: "4px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.08)", gap: "4px", overflowX: "auto" }}>
+                <div style={{ display: "flex", background: "rgba(0,0,0,0.03)", padding: "4px", borderRadius: "12px", border: "1px solid rgba(0,0,0,0.05)", gap: "4px", overflowX: "auto" }}>
                     {tabs.map(tab => (
                         <button key={tab.path} onClick={() => navigate(tab.path)} style={{
                             display: "flex", alignItems: "center", gap: "0.4rem",
@@ -257,7 +257,7 @@ const CustomerDashboard = () => {
                             fontSize: "0.8rem", fontWeight: 600, cursor: "pointer",
                             whiteSpace: "nowrap", border: "none",
                             background: isActive(tab.path) ? "var(--col-primary)" : "transparent",
-                            color: isActive(tab.path) ? "#fff" : "#94a3b8",
+                            color: isActive(tab.path) ? "#fff" : "var(--col-muted)",
                             transition: "all 0.2s",
                         }}>
                             {tab.icon} {tab.name}
@@ -305,14 +305,14 @@ const DashboardHome = () => {
             {/* Welcome banner */}
             <div style={{
                 padding: "2rem",
-                background: "linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(99,102,241,0.08) 100%)",
-                border: "1px solid rgba(59,130,246,0.2)",
+                background: "linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(99,102,241,0.05) 100%)",
+                border: "1px solid rgba(59,130,246,0.15)",
                 borderRadius: "1.25rem",
             }}>
-                <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff" }}>
+                <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "var(--col-foreground)" }}>
                     Welcome back, <span style={{ color: "var(--col-primary)" }}>{user?.name || user?.username}</span> 👋
                 </h2>
-                <p style={{ color: "#94a3b8", marginTop: "0.5rem" }}>Ready for your next adventure?</p>
+                <p style={{ color: "var(--col-muted)", marginTop: "0.5rem" }}>Ready for your next adventure?</p>
                 <Button variant="primary" style={{ marginTop: "1.25rem", display: "inline-flex", alignItems: "center", gap: "0.5rem" }} onClick={() => navigate("/dashboard/book")}>
                     <Compass size={18} /> Browse Cars
                 </Button>
@@ -324,8 +324,8 @@ const DashboardHome = () => {
                     <div key={i} style={{ ...card, padding: "1.5rem", display: "flex", alignItems: "center", gap: "1rem" }}>
                         <div style={{ padding: "0.75rem", background: s.color + "22", borderRadius: "12px", color: s.color, flexShrink: 0 }}>{s.icon}</div>
                         <div>
-                            <p style={{ fontSize: "0.7rem", color: "#94a3b8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em" }}>{s.title}</p>
-                            <p style={{ fontSize: "1.5rem", fontWeight: 800, color: "#fff" }}>{s.value}</p>
+                            <p style={{ fontSize: "0.7rem", color: "var(--col-muted)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em" }}>{s.title}</p>
+                            <p style={{ fontSize: "1.5rem", fontWeight: 800, color: "var(--col-foreground)" }}>{s.value}</p>
                         </div>
                     </div>
                 ))}
@@ -333,7 +333,7 @@ const DashboardHome = () => {
 
             {/* Recent Bookings */}
             <div>
-                <h3 style={{ fontWeight: 700, color: "#fff", marginBottom: "1rem" }}>Recent Bookings</h3>
+                <h3 style={{ fontWeight: 700, color: "var(--col-foreground)", marginBottom: "1rem" }}>Recent Bookings</h3>
                 {loading ? <p style={{ color: "#64748b" }}>Loading…</p> : recent.length === 0 ? (
                     <div style={{ ...card, padding: "3rem", textAlign: "center" }}>
                         <p style={{ color: "#64748b" }}>No bookings yet.</p>
@@ -344,16 +344,16 @@ const DashboardHome = () => {
                         {recent.map(b => (
                             <div key={b.id} style={{ ...card, padding: "1rem 1.25rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
                                 <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                                    <div style={{ padding: "0.75rem", background: "rgba(255,255,255,0.06)", borderRadius: "10px" }}>
+                                    <div style={{ padding: "0.75rem", background: "rgba(0,0,0,0.03)", borderRadius: "10px" }}>
                                         <CarIcon size={20} style={{ color: "var(--col-primary)" }} />
                                     </div>
                                     <div>
-                                        <p style={{ fontWeight: 600, color: "#fff", fontSize: "0.9rem" }}>Booking #{b.id?.slice(-6)}</p>
+                                        <p style={{ fontWeight: 600, color: "var(--col-foreground)", fontSize: "0.9rem" }}>Booking #{b.id?.slice(-6)}</p>
                                         <p style={{ fontSize: "0.75rem", color: "#64748b" }}>{b.startDate} → {b.endDate}</p>
                                     </div>
                                 </div>
                                 <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                                    <span style={{ fontWeight: 700, color: "#fff" }}>${b.totalPrice}</span>
+                                    <span style={{ fontWeight: 700, color: "var(--col-foreground)" }}>${b.totalPrice}</span>
                                     <Badge variant={b.status === "COMPLETED" ? "success" : b.status === "CANCELLED" ? "danger" : b.status === "APPROVED" ? "default" : "warning"}>
                                         {b.status}
                                     </Badge>
@@ -438,11 +438,11 @@ const BookCars = () => {
                             <div style={{ padding: "1.25rem", flexGrow: 1, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                                     <div>
-                                        <h4 style={{ fontWeight: 700, color: "#fff", fontSize: "1rem" }}>{car.brand} {car.model}</h4>
-                                        <p style={{ fontSize: "0.75rem", color: "#94a3b8" }}>★ {car.averageRating > 0 ? car.averageRating.toFixed(1) : "5.0"}</p>
+                                        <h4 style={{ fontWeight: 700, color: "var(--col-foreground)", fontSize: "1rem" }}>{car.brand} {car.model}</h4>
+                                        <p style={{ fontSize: "0.75rem", color: "var(--col-muted)" }}>★ {car.averageRating > 0 ? car.averageRating.toFixed(1) : "5.0"}</p>
                                     </div>
                                     <div style={{ textAlign: "right" }}>
-                                        <span style={{ fontWeight: 800, color: "#fff" }}>${car.pricePerDay}</span>
+                                        <span style={{ fontWeight: 800, color: "var(--col-foreground)" }}>${car.pricePerDay}</span>
                                         <span style={{ fontSize: "0.7rem", color: "#64748b", display: "block" }}>/day</span>
                                     </div>
                                 </div>
@@ -514,7 +514,7 @@ const MyBookings = () => {
 
     return (
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <h3 style={{ fontWeight: 700, color: "#fff" }}>My Bookings ({bookings.length})</h3>
+            <h3 style={{ fontWeight: 700, color: "var(--col-foreground)" }}>My Bookings ({bookings.length})</h3>
 
             {bookings.length === 0 && (
                 <div style={{ ...card, padding: "3rem", textAlign: "center" }}>
@@ -538,8 +538,8 @@ const MyBookings = () => {
                                         <Clock size={22} style={{ color: "var(--col-primary)" }} />}
                             </div>
                             <div>
-                                <p style={{ fontWeight: 700, color: "#fff" }}>
-                                    Booking #{b.id?.slice(-6)} <span style={{ fontWeight: 400, color: "#94a3b8", fontSize: "0.8rem" }}>— Car #{b.carId?.slice(-6)}</span>
+                                <p style={{ fontWeight: 700, color: "var(--col-foreground)" }}>
+                                    Booking #{b.id?.slice(-6)} <span style={{ fontWeight: 400, color: "var(--col-muted)", fontSize: "0.8rem" }}>— Car #{b.carId?.slice(-6)}</span>
                                 </p>
                                 <p style={{ fontSize: "0.8rem", color: "#64748b", marginTop: "2px" }}>
                                     {b.startDate} → {b.endDate}
@@ -549,7 +549,7 @@ const MyBookings = () => {
 
                         {/* Status + Amount */}
                         <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
-                            <span style={{ fontWeight: 800, color: "#fff", fontSize: "1.1rem" }}>${b.totalPrice}</span>
+                            <span style={{ fontWeight: 800, color: "var(--col-foreground)", fontSize: "1.1rem" }}>${b.totalPrice}</span>
                             <Badge variant={
                                 b.status === "COMPLETED" ? "success" :
                                     b.status === "CANCELLED" ? "danger" :

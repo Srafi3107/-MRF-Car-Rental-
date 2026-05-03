@@ -29,7 +29,7 @@ const Home = () => {
                 <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
                     <div style={{
                         position: "absolute", inset: 0, zIndex: 1,
-                        background: "linear-gradient(to right, rgba(10,25,47,0.97) 0%, rgba(10,25,47,0.7) 50%, rgba(10,25,47,0.2) 100%)",
+                        background: "linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.3) 100%)",
                     }} />
                     <img
                         src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=2070"
@@ -65,7 +65,7 @@ const Home = () => {
                         <h1 style={{
                             fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
                             fontWeight: 800,
-                            color: "#fff",
+                            color: "var(--col-foreground)",
                             lineHeight: 1.1,
                             marginBottom: "1.5rem",
                         }}>
@@ -73,7 +73,7 @@ const Home = () => {
                         </h1>
 
                         <p style={{
-                            fontSize: "1.1rem", color: "#cbd5e1", lineHeight: 1.7,
+                            fontSize: "1.1rem", color: "var(--col-muted)", lineHeight: 1.7,
                             marginBottom: "2.5rem", maxWidth: "32rem",
                         }}>
                             Unlock extraordinary experiences with our curated collection of premium vehicles. Simple booking, unparalleled service.
@@ -111,8 +111,8 @@ const Home = () => {
                                 alignItems: "center",
                                 textAlign: "center",
                                 padding: "2.5rem 1.5rem",
-                                background: "rgba(255,255,255,0.04)",
-                                border: "1px solid rgba(255,255,255,0.07)",
+                                background: "rgba(0,0,0,0.02)",
+                                border: "1px solid rgba(0,0,0,0.05)",
                                 borderRadius: "1.25rem",
                                 gap: "1rem",
                             }}
@@ -126,7 +126,7 @@ const Home = () => {
                             }}>
                                 {item.icon}
                             </div>
-                            <h3 style={{ fontSize: "1.125rem", fontWeight: 700, color: "#fff" }}>{item.title}</h3>
+                            <h3 style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--col-foreground)" }}>{item.title}</h3>
                             <p style={{ fontSize: "0.875rem", color: "#94a3b8", lineHeight: 1.6 }}>{item.desc}</p>
                         </motion.div>
                     ))}
@@ -153,7 +153,7 @@ const Home = () => {
                     }}
                 >
                     <div>
-                        <h2 style={{ fontSize: "1.75rem", fontWeight: 800, color: "#fff", marginBottom: "0.5rem" }}>
+                        <h2 style={{ fontSize: "1.75rem", fontWeight: 800, color: "var(--col-foreground)", marginBottom: "0.5rem" }}>
                             Ready to hit the road?
                         </h2>
                         <p style={{ color: "#94a3b8" }}>Browse our full fleet and book your dream car today.</p>

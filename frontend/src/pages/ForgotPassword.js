@@ -8,12 +8,12 @@ import { Link } from "react-router-dom";
 
 const inputStyle = {
     width: "100%",
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(0,0,0,0.03)",
+    border: "1px solid rgba(0,0,0,0.08)",
     borderRadius: "12px",
     padding: "0.8rem 1rem",
     paddingLeft: "2.75rem",
-    color: "#fff",
+    color: "var(--col-foreground)",
     fontSize: "0.95rem",
     outline: "none",
     transition: "all 0.2s ease",
@@ -74,12 +74,12 @@ export default function ForgotPassword() {
     return (
         <div style={{
             minHeight: "100vh",
-            background: "#0a0a0c",
+            background: "var(--col-bg)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             padding: "2rem",
-            color: "#f8fafc"
+            color: "var(--col-foreground)"
         }}>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -87,12 +87,12 @@ export default function ForgotPassword() {
                 style={{
                     width: "100%",
                     maxWidth: "440px",
-                    background: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(255,255,255,0.06)",
+                    background: "rgba(0,0,0,0.02)",
+                    border: "1px solid rgba(0,0,0,0.05)",
                     borderRadius: "24px",
                     padding: "2.5rem",
                     backdropFilter: "blur(20px)",
-                    boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)"
+                    boxShadow: "0 25px 50px -12px rgba(0,0,0,0.1)"
                 }}
             >
                 {/* Header */}
@@ -113,7 +113,7 @@ export default function ForgotPassword() {
                     <h1 style={{ fontSize: "1.75rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.5rem" }}>
                         {step === 1 ? "Forgot Password?" : step === 2 ? "Reset Status" : "Success!"}
                     </h1>
-                    <p style={{ color: "#94a3b8", fontSize: "0.95rem" }}>
+                    <p style={{ color: "var(--col-muted)", fontSize: "0.95rem" }}>
                         {step === 1 ? "Enter your details to request an Admin approval." :
                             step === 2 ? "Check if your request has been approved." :
                                 "Your password has been reset successfully."}
@@ -172,8 +172,8 @@ export default function ForgotPassword() {
                         >
                             {/* Status Card */}
                             <div style={{
-                                background: "rgba(255,255,255,0.02)",
-                                border: "1px solid rgba(255,255,255,0.06)",
+                                background: "rgba(0,0,0,0.02)",
+                                border: "1px solid rgba(0,0,0,0.05)",
                                 borderRadius: "16px",
                                 padding: "1.25rem",
                                 display: "flex",
@@ -186,7 +186,7 @@ export default function ForgotPassword() {
                                             <Clock size={20} color="#f59e0b" />
                                         </div>
                                         <div style={{ flex: 1 }}>
-                                            <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "#fff" }}>Status: Pending Approval</div>
+                                            <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--col-foreground)" }}>Status: Pending Approval</div>
                                             <div style={{ fontSize: "0.75rem", color: "#64748b" }}>Please ask your Admin to approve.</div>
                                         </div>
                                     </>
@@ -197,7 +197,7 @@ export default function ForgotPassword() {
                                             <ShieldCheck size={20} color="#10b981" />
                                         </div>
                                         <div style={{ flex: 1 }}>
-                                            <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "#fff" }}>Status: Approved</div>
+                                            <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--col-foreground)" }}>Status: Approved</div>
                                             <div style={{ fontSize: "0.75rem", color: "#64748b" }}>You can now set a new password.</div>
                                         </div>
                                     </>
@@ -208,7 +208,7 @@ export default function ForgotPassword() {
                                             <AlertCircle size={20} color="#ef4444" />
                                         </div>
                                         <div style={{ flex: 1 }}>
-                                            <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "#fff" }}>No Request Found</div>
+                                            <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--col-foreground)" }}>No Request Found</div>
                                             <div style={{ fontSize: "0.75rem", color: "#64748b" }}>Submit a request first.</div>
                                         </div>
                                     </>
