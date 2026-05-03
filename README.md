@@ -71,8 +71,44 @@ CAR RENT/
 
 🤖 AI-Powered Assistant & Smart UI
 AI Assistant Integration: Embed an intelligent assistant (chat-based) to help users:
+
 Find available cars based on natural language queries (e.g., “SUV under $50 for 3 days”)
+
 Get booking suggestions and pricing insights
+
 AI-Driven Recommendations: Personalized vehicle recommendations using user behavior and booking history
+
 Smart Search & Filtering: Semantic search instead of basic keyword filtering
+
 Voice UI (Optional): Enable voice-based booking interactions for improved accessibility
+
+
+
+⚙️ Backend Evolution (Node.js Microservices)
+
+Node.js API Layer: Introduce a scalable backend using Node.js (Express/NestJS) alongside or replacing the custom Java server
+
+Microservices Architecture:
+
+Auth Service (JWT/OAuth)
+
+Booking Service
+
+Fleet Management Service
+
+
+Database Upgrade:
+
+Move from CSV → PostgreSQL / MongoDB
+
+Implement indexing and caching (Redis) for performance
+
+Real-Time Features:
+
+WebSocket-based booking updates and notifications
+
+Cloud Deployment:
+
+Dockerize services and deploy via AWS/GCP
+
+CI/CD pipeline integration (GitHub Actions)
