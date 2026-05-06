@@ -13,12 +13,17 @@ public class Car implements Serializable {
     private String description;
     private double totalRating;
     private int ratingCount;
+    private String fuelType;
+    private String transmission;
+    private int seatingCapacity;
+    private int year;
 
     public Car() {
     }
 
     public Car(String id, String brand, String model, double pricePerDay, boolean isAvailable, String image,
-            String description, double totalRating, int ratingCount) {
+            String description, double totalRating, int ratingCount, String fuelType, String transmission,
+            int seatingCapacity, int year) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -28,6 +33,10 @@ public class Car implements Serializable {
         this.description = description;
         this.totalRating = totalRating;
         this.ratingCount = ratingCount;
+        this.fuelType = fuelType;
+        this.transmission = transmission;
+        this.seatingCapacity = seatingCapacity;
+        this.year = year;
     }
 
     public String getId() {
@@ -102,6 +111,38 @@ public class Car implements Serializable {
         this.ratingCount = ratingCount;
     }
 
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public String getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(String transmission) {
+        this.transmission = transmission;
+    }
+
+    public int getSeatingCapacity() {
+        return seatingCapacity;
+    }
+
+    public void setSeatingCapacity(int seatingCapacity) {
+        this.seatingCapacity = seatingCapacity;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     public double getAverageRating() {
         if (ratingCount == 0)
             return 0;
@@ -112,8 +153,10 @@ public class Car implements Serializable {
     public String toString() {
         String img = (image == null) ? "" : image;
         String desc = (description == null) ? "" : description;
+        String fuel = (fuelType == null) ? "Petrol" : fuelType;
+        String trans = (transmission == null) ? "Automatic" : transmission;
         return id + "|" + brand + "|" + model + "|" + pricePerDay + "|" + isAvailable + "|" + img + "|" + desc + "|"
-                + totalRating + "|" + ratingCount;
+                + totalRating + "|" + ratingCount + "|" + fuel + "|" + trans + "|" + seatingCapacity + "|" + year;
     }
 
     public static Car fromString(String line) {
@@ -124,8 +167,12 @@ public class Car implements Serializable {
         String desc = (parts.length >= 7) ? parts[6] : "";
         double totalR = (parts.length >= 8) ? Double.parseDouble(parts[7]) : 0;
         int countR = (parts.length >= 9) ? Integer.parseInt(parts[8]) : 0;
+        String fuel = (parts.length >= 10) ? parts[9] : "Petrol";
+        String trans = (parts.length >= 11) ? parts[10] : "Automatic";
+        int seats = (parts.length >= 12) ? Integer.parseInt(parts[11]) : 5;
+        int yr = (parts.length >= 13) ? Integer.parseInt(parts[12]) : 2024;
 
         return new Car(parts[0], parts[1], parts[2], Double.parseDouble(parts[3]), Boolean.parseBoolean(parts[4]), img,
-                desc, totalR, countR);
+                desc, totalR, countR, fuel, trans, seats, yr);
     }
 }

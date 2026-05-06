@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../api/api";
-import { Search, Filter, Image as ImageIcon, ImageOff } from "lucide-react";
+import { Search, Filter, Image as ImageIcon, ImageOff, Fuel, Gauge, Users, Calendar } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
 import { motion, AnimatePresence } from "framer-motion";
@@ -266,6 +266,26 @@ const Fleet = () => {
                                         <div style={{ textAlign: "right" }}>
                                             <span style={{ fontWeight: 800, color: "var(--col-foreground)" }}>${car.pricePerDay}</span>
                                             <span style={{ fontSize: "0.7rem", color: "var(--col-muted)", display: "block" }}>/day</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Specs Grid */}
+                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", margin: "0.25rem 0" }}>
+                                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--col-muted)" }}>
+                                            <Fuel size={14} />
+                                            <span style={{ fontSize: "0.75rem" }}>{car.fuelType || "Petrol"}</span>
+                                        </div>
+                                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--col-muted)" }}>
+                                            <Gauge size={14} />
+                                            <span style={{ fontSize: "0.75rem" }}>{car.transmission || "Auto"}</span>
+                                        </div>
+                                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--col-muted)" }}>
+                                            <Users size={14} />
+                                            <span style={{ fontSize: "0.75rem" }}>{car.seatingCapacity || 5} Seats</span>
+                                        </div>
+                                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--col-muted)" }}>
+                                            <Calendar size={14} />
+                                            <span style={{ fontSize: "0.75rem" }}>{car.year || 2024}</span>
                                         </div>
                                     </div>
 

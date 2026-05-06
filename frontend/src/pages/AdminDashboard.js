@@ -69,6 +69,10 @@ const VehicleModal = ({ car, onClose, onSaved }) => {
         image: car?.image || "",
         id: car?.id || undefined,
         isAvailable: car?.isAvailable ?? true,
+        fuelType: car?.fuelType || "Petrol",
+        transmission: car?.transmission || "Automatic",
+        seatingCapacity: car?.seatingCapacity || 5,
+        year: car?.year || 2024,
     });
     const [previewUrl, setPreviewUrl] = useState(car?.imageUrl || "");
     const [uploading, setUploading] = useState(false);
@@ -208,6 +212,36 @@ const VehicleModal = ({ car, onClose, onSaved }) => {
                         <label style={labelStyle}>Description</label>
                         <textarea name="description" style={{ ...inputStyle, minHeight: "80px", resize: "vertical" }}
                             placeholder="Brief description of the vehicle..." value={form.description} onChange={handleChange} />
+                    </div>
+
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                        <div>
+                            <label style={labelStyle}>Fuel Type</label>
+                            <select name="fuelType" style={inputStyle} value={form.fuelType} onChange={handleChange}>
+                                <option value="Petrol">Petrol</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="Electric">Electric</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style={labelStyle}>Transmission</label>
+                            <select name="transmission" style={inputStyle} value={form.transmission} onChange={handleChange}>
+                                <option value="Automatic">Automatic</option>
+                                <option value="Manual">Manual</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                        <div>
+                            <label style={labelStyle}>Seating Capacity</label>
+                            <input name="seatingCapacity" type="number" min="1" max="10" style={inputStyle} value={form.seatingCapacity} onChange={handleChange} />
+                        </div>
+                        <div>
+                            <label style={labelStyle}>Year</label>
+                            <input name="year" type="number" min="1900" max={new Date().getFullYear() + 1} style={inputStyle} value={form.year} onChange={handleChange} />
+                        </div>
                     </div>
 
                     <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.5rem" }}>

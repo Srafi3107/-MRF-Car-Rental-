@@ -44,6 +44,10 @@ public class CarHandler extends BaseHandler {
             car.setPricePerDay(Double.parseDouble(json.get("pricePerDay")));
             car.setImage(json.get("image"));
             car.setDescription(json.get("description"));
+            car.setFuelType(json.get("fuelType"));
+            car.setTransmission(json.get("transmission"));
+            car.setSeatingCapacity(json.containsKey("seatingCapacity") ? Integer.parseInt(json.get("seatingCapacity")) : 5);
+            car.setYear(json.containsKey("year") ? Integer.parseInt(json.get("year")) : 2024);
             carService.addCar(car);
             sendResponse(exchange, 201, carToJson(car, exchange));
         } else if ("PUT".equalsIgnoreCase(method)) {
@@ -57,6 +61,10 @@ public class CarHandler extends BaseHandler {
             car.setAvailable(Boolean.parseBoolean(json.get("isAvailable")));
             car.setImage(json.get("image"));
             car.setDescription(json.get("description"));
+            car.setFuelType(json.get("fuelType"));
+            car.setTransmission(json.get("transmission"));
+            car.setSeatingCapacity(json.containsKey("seatingCapacity") ? Integer.parseInt(json.get("seatingCapacity")) : 5);
+            car.setYear(json.containsKey("year") ? Integer.parseInt(json.get("year")) : 2024);
 
             Car updated = carService.updateCar(car);
             if (updated != null) {
@@ -93,6 +101,10 @@ public class CarHandler extends BaseHandler {
                 + ", \"image\":\"" + img + "\", \"imageUrl\":\"" + imageUrl + "\", \"description\":\""
                 + car.getDescription() + "\", \"averageRating\":"
                 + car.getAverageRating()
-                + ", \"ratingCount\":" + car.getRatingCount() + "}";
+                + ", \"ratingCount\":" + car.getRatingCount()
+                + ", \"fuelType\":\"" + (car.getFuelType() == null ? "Petrol" : car.getFuelType()) + "\""
+                + ", \"transmission\":\"" + (car.getTransmission() == null ? "Automatic" : car.getTransmission()) + "\""
+                + ", \"seatingCapacity\":" + car.getSeatingCapacity()
+                + ", \"year\":" + car.getYear() + "}";
     }
 }

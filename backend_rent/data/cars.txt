@@ -1,1 +1,1 @@
-car-1|Kia|Sportage|500.0|true|71371e6e.jpg||0.0|0
+car-1|Kia|Sportage|500.0|true|71371e6e.jpg||0.0|0|Petrol|Automatic|5|2024
