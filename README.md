@@ -58,16 +58,6 @@ CAR RENT/
 └── Car pics/               # Persistent Binary Image Storage
 ```
 
----
-
-## 🚀 Quick Start
-
-1. **Backend**: Compile and run `Main.java` inside `backend_rent/src/`. The server will start on port `8080`.
-2. **Frontend**: Run `npm install` and `npm start` in the `frontend/` directory.
-3. **Verify**: Log in as `admin` (password: `admin123`) to access the Security Panel and approve reset requests!
-
----
-
 ## 🔮 Future Enhancements
 
 ### 🤖 AI-Powered Assistant & Smart UI
