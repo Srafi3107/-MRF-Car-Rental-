@@ -14,6 +14,7 @@ import CustomerDashboard from './pages/CustomerDashboard';
 import Profile from './pages/Profile';
 import ForgotPassword from './pages/ForgotPassword';
 import NotFound from './pages/NotFound';
+import UMLGenerator from './pages/UMLGenerator';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 
 const PrivateRoute = ({ children, role }) => {
@@ -41,6 +42,7 @@ function App() {
               <Route path="/fleet" element={<Fleet />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/uml" element={<UMLGenerator />} />
 
               {/* Auth Routes */}
               <Route path="/login" element={<Login />} />

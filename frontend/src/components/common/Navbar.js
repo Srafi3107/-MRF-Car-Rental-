@@ -33,6 +33,7 @@ const Navbar = () => {
         { name: "Fleet", path: "/fleet" },
         { name: "About", path: "/about" },
         { name: "Contact", path: "/contact" },
+        { name: "UML", path: "/uml" },
     ];
 
     const navStyle = {
